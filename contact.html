@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — By Lucas O.M.</title>
+<meta name="description" content="Contact Lucas O.M. — street photography. An After School Program project.">
+<link rel="icon" type="image/png" href="asp-logo-cream.png">
+<style>
+  :root {
+    --bg: #042d7c;
+    --fg: #efebd1;
+    --muted: rgba(239, 235, 209, 0.55);
+    --brand-font: "Forma DJR Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: var(--bg); }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--brand-font);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  ::selection { background: var(--fg); color: var(--bg); }
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+  }
+  .topbar .mark { width: 26px; height: auto; display: block; }
+  .topbar a.back-link {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .topbar a.back-link:hover { text-decoration: underline; }
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 44px;
+    padding: 40px 24px 72px;
+    width: 100%;
+  }
+  main .portrait {
+    width: min(640px, 100%);
+  }
+  main .portrait img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  main .info { text-align: center; }
+  main h1 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+  }
+  a.email {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--fg);
+    text-decoration: none;
+    border-bottom: 1px solid var(--muted);
+    padding-bottom: 3px;
+  }
+  a.email:hover { border-bottom-color: var(--fg); }
+  footer {
+    padding: 32px 24px 48px;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-indent: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  footer a {
+    color: var(--fg);
+    text-decoration: none;
+    border-bottom: 1px solid var(--muted);
+  }
+  footer a:hover { border-bottom-color: var(--fg); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html"><img class="mark" src="asp-logo-cream.png" alt="After School Program"></a>
+  <a class="back-link" href="index.html">Gallery</a>
+</div>
+
+<main>
+  <div class="portrait">
+    <img src="self-portrait.jpg" alt="Lucas O.M. — self-portrait with camera in a mirror">
+  </div>
+  <div class="info">
+    <h1>hey what's up</h1>
+    <a class="email" href="mailto:lucas@afterschoolprogram.cc">lucas@afterschoolprogram.cc</a>
+  </div>
+</main>
+
+<footer>&copy; <span id="year"></span> <a href="https://afterschoolprogram.cc">After School Program</a> &mdash; All rights reserved</footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>By Lucas O.M.</title>
+<meta name="description" content="Street photography portfolio. An After School Program project.">
+<link rel="icon" type="image/png" href="asp-logo-cream.png">
+<style>
+  :root {
+    --bg: #042d7c;      /* ASP brand blue */
+    --fg: #efebd1;      /* ASP brand cream */
+    --muted: rgba(239, 235, 209, 0.55);
+    --brand-font: "Forma DJR Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  ::selection { background: var(--fg); color: var(--bg); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: var(--bg); }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--brand-font);
+    -webkit-font-smoothing: antialiased;
+  }
+  .topbar {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 28px 24px;
+  }
+  .topbar > :last-child { justify-self: end; }
+  .topbar .mark {
+    width: 26px;
+    height: auto;
+    display: block;
+  }
+  .topbar a.contact-link {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .topbar a.contact-link:hover { text-decoration: underline; }
+  .topbar h1 {
+    font-size: clamp(24px, 4.5vw, 40px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    text-align: center;
+  }
+  .gallery {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 26px 26px 12px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    align-items: start;
+  }
+  @media (max-width: 1000px) {
+    .gallery { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .gallery { grid-template-columns: 1fr; }
+  }
+  .item {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    cursor: zoom-in;
+    background: #03245f;
+    border: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  .item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease, filter 0.25s ease;
+  }
+  .item img.loaded { opacity: 1; }
+  .item:hover img.loaded { filter: brightness(1.08); }
+  footer {
+    padding: 56px 24px 72px;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-indent: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  footer a {
+    color: var(--fg);
+    text-decoration: none;
+    border-bottom: 1px solid var(--muted);
+  }
+  footer a:hover { border-bottom-color: var(--fg); }
+
+  /* Lightbox */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 15, 41, 0.97);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: calc(100vw - 32px);
+    max-height: calc(100vh - 32px);
+    object-fit: contain;
+    cursor: zoom-out;
+  }
+  .lightbox .nav {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 22%;
+    min-width: 80px;
+    border: 0;
+    background: transparent;
+    color: transparent;
+    font-size: 34px;
+    font-weight: 200;
+    cursor: pointer;
+    z-index: 101;
+    font-family: inherit;
+  }
+  .lightbox .nav:hover { color: rgba(239,235,209,0.75); }
+  .lightbox .prev { left: 0; text-align: left; padding-left: 22px; }
+  .lightbox .next { right: 0; text-align: right; padding-right: 22px; }
+  .lightbox .close {
+    position: fixed;
+    top: 14px;
+    right: 20px;
+    border: 0;
+    background: transparent;
+    color: rgba(239,235,209,0.6);
+    font-size: 30px;
+    font-weight: 200;
+    cursor: pointer;
+    z-index: 102;
+    font-family: inherit;
+  }
+  .lightbox .close:hover { color: var(--fg); }
+  .lightbox .count {
+    position: fixed;
+    bottom: 16px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: rgba(239,235,209,0.45);
+  }
+  @media (max-width: 500px) {
+    .lightbox .nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <img class="mark" src="asp-logo-cream.png" alt="After School Program">
+  <h1>bylucasom</h1>
+  <a class="contact-link" href="contact.html">Contact</a>
+</div>
+
+<div class="gallery" id="gallery"></div>
+
+<footer>&copy; <span id="year"></span> <a href="https://afterschoolprogram.cc">After School Program</a> &mdash; All rights reserved</footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="close" aria-label="Close">&times;</button>
+  <button class="nav prev" aria-label="Previous">&#8592;</button>
+  <img id="lightbox-img" alt="">
+  <button class="nav next" aria-label="Next">&#8594;</button>
+  <div class="count" id="lightbox-count"></div>
+</div>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+let photos = [];
+let current = -1;
+
+const gallery = document.getElementById('gallery');
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lightbox-img');
+const lbCount = document.getElementById('lightbox-count');
+
+function makeItem(p, idx) {
+  const btn = document.createElement('button');
+  btn.className = 'item';
+  const img = document.createElement('img');
+  img.loading = 'lazy';
+  img.decoding = 'async';
+  img.src = 'photos/thumb/' + p.src;
+  img.alt = 'Street photograph';
+  img.width = p.w;
+  img.height = p.h;
+  if (img.complete && img.naturalWidth) img.classList.add('loaded');
+  else img.addEventListener('load', () => img.classList.add('loaded'));
+  btn.appendChild(img);
+  btn.addEventListener('click', () => openLightbox(idx));
+  return btn;
+}
+
+// Uniform grid: CSS handles columns; just append in order.
+function layout() {
+  gallery.innerHTML = '';
+  photos.forEach((p, idx) => gallery.appendChild(makeItem(p, idx)));
+}
+
+function openLightbox(idx) {
+  current = idx;
+  const p = photos[idx];
+  lbImg.src = 'photos/full/' + p.src;
+  lbCount.textContent = (idx + 1) + ' / ' + photos.length;
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // preload neighbors
+  [idx + 1, idx - 1].forEach(i => {
+    if (photos[i]) { const pre = new Image(); pre.src = 'photos/full/' + photos[i].src; }
+  });
+}
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  lbImg.src = '';
+  current = -1;
+  document.body.style.overflow = '';
+}
+function step(d) {
+  if (current < 0) return;
+  openLightbox((current + d + photos.length) % photos.length);
+}
+
+lightbox.querySelector('.close').addEventListener('click', closeLightbox);
+lightbox.querySelector('.prev').addEventListener('click', e => { e.stopPropagation(); step(-1); });
+lightbox.querySelector('.next').addEventListener('click', e => { e.stopPropagation(); step(1); });
+lightbox.addEventListener('click', e => { if (e.target === lightbox || e.target === lbImg) closeLightbox(); });
+document.addEventListener('keydown', e => {
+  if (current < 0) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+// swipe on mobile
+let touchX = null;
+lightbox.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+lightbox.addEventListener('touchend', e => {
+  if (touchX === null) return;
+  const dx = e.changedTouches[0].clientX - touchX;
+  if (Math.abs(dx) > 50) step(dx > 0 ? -1 : 1);
+  touchX = null;
+}, { passive: true });
+
+
+fetch('manifest.json', { cache: 'no-store' })
+  .then(r => r.json())
+  .then(data => { photos = data; layout(); });
+</script>
+</body>
+</html>
