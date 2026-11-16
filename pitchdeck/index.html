@@ -6,11 +6,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500..800&family=Courier+Prime:wght@400;700&family=Oswald:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 <style>
-html,body{margin:0;height:100%;background:#0b0806;overflow:hidden}
-#stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
-#deck{position:relative;width:1920px;height:1080px;transform-origin:center center;flex-shrink:0}
-#deck>section{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:hidden;opacity:0;visibility:hidden;transition:opacity .45s ease,visibility .45s}
-#deck>section.on{opacity:1;visibility:visible}
+html,body{margin:0;background:#0b0806}
+#deck{position:relative;width:100%}
+#deck .slot{position:relative;width:100%;overflow:hidden}
+#deck section{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:hidden;transform-origin:0 0}
 x-shape{display:block;border-radius:50%}
 section p,section h1,section h2,section h3{margin-top:0}
 video{display:block}
@@ -332,6 +331,9 @@ section{font-family:'Oswald',Arial,sans-serif}
 .tex{opacity:.28}
 .frame,.frame2{display:none!important}
 
+/* scroll mode: entrance animations hold at their start until the section scrolls into view */
+#deck .title,#deck h2,#deck .statement,#deck .lede,#deck .body,#deck .cards,#deck .split,#deck .pills,#deck .tbl,#deck .tv,#deck .polaroid,#deck .mock,#deck .sticky,#deck .pres{animation-play-state:paused}
+#deck section.on .title,#deck section.on h2,#deck section.on .statement,#deck section.on .lede,#deck section.on .body,#deck section.on .cards,#deck section.on .split,#deck section.on .pills,#deck section.on .tbl,#deck section.on .tv,#deck section.on .polaroid,#deck section.on .mock,#deck section.on .sticky,#deck section.on .pres{animation-play-state:running}
 </style></head><body>
 <div id="stage"><div id="deck">
 <section id="cover" class="curtain" data-transition="fade">
@@ -533,18 +535,29 @@ section{font-family:'Oswald',Arial,sans-serif}
 </section>
 
 </div></div>
-<div class="hint" id="hint">← → TO NAVIGATE</div>
+<div class="hint" id="hint">SCROLL ↓</div>
 <div class="nav"><button id="prev" aria-label="Previous slide">‹</button><span id="count"></span><button id="next" aria-label="Next slide">›</button></div>
 <script>
-const deck=document.getElementById('deck'),S=[...deck.children];let i=0;
-function fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);deck.style.transform='scale('+s+')'}
-function go(n){i=Math.max(0,Math.min(S.length-1,n));S.forEach((s,k)=>{s.classList.toggle('on',k===i);s.querySelectorAll('video').forEach(v=>{if(k===i){v.currentTime=0;v.play().catch(()=>{})}else v.pause()})});
-document.getElementById('count').textContent=(i+1)+' / '+S.length;history.replaceState(null,'','#'+(i+1))}
+const deck=document.getElementById('deck'),S=[...deck.children];
+// wrap each 1920x1080 section in a slot that scales it to the viewport width
+S.forEach(sec=>{const w=document.createElement('div');w.className='slot';deck.insertBefore(w,sec);w.appendChild(sec)});
+const slots=[...deck.children];
+function fit(){const s=innerWidth/1920;slots.forEach(sl=>{sl.style.height=(1080*s)+'px';sl.firstElementChild.style.transform='scale('+s+')'})}
 addEventListener('resize',fit);fit();
-addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(i+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(i-1)}if(e.key==='Home')go(0);if(e.key==='End')go(S.length-1);if(e.key==='f')document.documentElement.requestFullscreen?.()});
-document.getElementById('next').onclick=()=>go(i+1);document.getElementById('prev').onclick=()=>go(i-1);
-document.getElementById('stage').addEventListener('click',e=>{go(e.clientX>innerWidth/3?i+1:i-1)});
-let tx=null;addEventListener('touchstart',e=>tx=e.touches[0].clientX);addEventListener('touchend',e=>{if(tx==null)return;const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>40)go(d<0?i+1:i-1);tx=null});
+// play animations + videos as sections enter the viewport
+const io=new IntersectionObserver(es=>{es.forEach(e=>{const sec=e.target;
+if(e.isIntersecting){if(!sec.classList.contains('on')){sec.classList.add('on');sec.querySelectorAll('video').forEach(v=>{v.currentTime=0})}
+sec.querySelectorAll('video').forEach(v=>v.play().catch(()=>{}))}
+else{sec.querySelectorAll('video').forEach(v=>v.pause())}})},{threshold:0.35});
+S.forEach(sec=>io.observe(sec));
+// arrow keys / buttons jump between sections (handy when presenting)
+function idx(){const y=scrollY+innerHeight/2;const k=slots.findIndex(sl=>sl.offsetTop+sl.offsetHeight>y);return k<0?slots.length-1:k}
+function go(n){slots[Math.max(0,Math.min(slots.length-1,n))].scrollIntoView({behavior:'smooth'})}
+addEventListener('keydown',e=>{if(['ArrowRight','PageDown'].includes(e.key)){e.preventDefault();go(idx()+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(idx()-1)}if(e.key==='Home')go(0);if(e.key==='End')go(slots.length-1);if(e.key==='f')document.documentElement.requestFullscreen?.()});
+document.getElementById('next').onclick=()=>go(idx()+1);document.getElementById('prev').onclick=()=>go(idx()-1);
+const count=document.getElementById('count');
+function tick(){count.textContent=(idx()+1)+' / '+slots.length}
+addEventListener('scroll',tick,{passive:true});tick();
 setTimeout(()=>document.getElementById('hint').style.opacity=0,5000);
-go((parseInt(location.hash.slice(1))||1)-1);
+const h=parseInt(location.hash.slice(1));if(h)go(h-1);
 </script></body></html>
