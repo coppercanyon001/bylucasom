@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pitch Deck — A Respective Collective Production</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500..800&family=Courier+Prime:wght@400;700&family=Oswald:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;height:100%;background:#0b0806;overflow:hidden}
+#stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+#deck{position:relative;width:1920px;height:1080px;transform-origin:center center;flex-shrink:0}
+#deck>section{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:hidden;opacity:0;visibility:hidden;transition:opacity .45s ease,visibility .45s}
+#deck>section.on{opacity:1;visibility:visible}
+x-shape{display:block;border-radius:50%}
+section p,section h1,section h2,section h3{margin-top:0}
+video{display:block}
+.nav{position:fixed;bottom:18px;right:22px;display:flex;gap:10px;align-items:center;font:500 14px 'Oswald',Arial,sans-serif;letter-spacing:2px;color:rgba(242,230,208,.75);z-index:10;user-select:none}
+.nav button{background:rgba(20,12,8,.55);border:1px solid rgba(242,230,208,.35);color:#F2E6D0;width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:18px;line-height:1}
+.nav button:hover{background:rgba(142,42,34,.85)}
+.hint{position:fixed;bottom:22px;left:24px;font:400 13px 'Oswald',Arial,sans-serif;letter-spacing:2px;color:rgba(242,230,208,.55);z-index:10;transition:opacity 1s}
+section{background:#1C1410;color:#F4EAD5;font-family:'Bodoni Moda',Georgia,serif;padding:128px;display:flex;flex-direction:column;box-sizing:border-box}
+section.light{background:#EFE3C8;color:#1C1410}
+section.accent{background:#C9A24A;color:#1C1410}
+.tc{font-family:'Courier Prime','Courier New',monospace;font-size:24px;letter-spacing:3px;color:#D9B45F;margin:0 0 40px 0}
+.light .tc{color:#8E2A22}
+.accent .tc{color:#1C1410}
+.rec{display:flex;flex-direction:row;align-items:center;gap:20px;margin:0 0 40px 0}
+.rec .tc{margin:0}
+.dot{width:22px;height:22px;background:#C0261C}
+.title{font-style:italic;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:280px;line-height:0.88;letter-spacing:-1px;margin:0 0 40px 0}
+h2{font-family:'Playfair Display',Georgia,serif;font-weight:600;font-size:96px;line-height:1;margin:0 0 48px 0}
+.statement{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:140px;line-height:0.95;margin:0 0 56px 0;width:1500px}
+.lede{font-size:44px;line-height:1.3;margin:0 0 32px 0;width:1400px}
+.body{font-size:32px;line-height:1.45;color:#C9BBA0;margin:0;width:1300px}
+.light .body{color:#5A4632}
+.accent .body{color:#1C1410}
+.spacer{flex:1}
+.meta{text-transform:uppercase;font-family:'Courier Prime','Courier New',monospace;font-size:24px;letter-spacing:2px;color:#C9BBA0;margin:0}
+.cards{display:grid;gap:40px;margin:16px 0 0 0}
+.cols3{grid-template-columns:1fr 1fr 1fr}
+.cols4{grid-template-columns:1fr 1fr 1fr 1fr}
+.card{border-top:4px solid #C9A24A;padding:32px 0 0 0}
+.light .card{border-top:4px solid #1C1410}
+.card .ch{font-family:'Playfair Display',Georgia,serif;font-weight:600;font-size:44px;line-height:1.05;margin:0 0 20px 0}
+.card .ct{font-size:32px;line-height:1.4;color:#C9BBA0;margin:0}
+.light .card .ct{color:#5A4632}
+.card .num{font-family:'Courier Prime','Courier New',monospace;font-size:24px;letter-spacing:3px;color:#D9B45F;margin:0 0 16px 0}
+.split{display:grid;grid-template-columns:1.4fr 1fr;gap:80px;align-items:end}
+.take{background:#C9A24A;color:#1C1410;padding:56px}
+.take .big{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:96px;line-height:1;margin:0 0 24px 0}
+.take .ct{font-size:32px;line-height:1.4;margin:0;color:#1C1410}
+.tbl{font-size:28px;color:#1C1410;width:1664px}
+.tbl .hd{background:#1C1410;color:#EFE3C8}
+.pills{display:flex;flex-direction:row;flex-wrap:wrap;gap:24px;margin:0 0 64px 0;width:1500px}
+.pill{background:#1C1410;color:#EFE3C8;font-size:32px;padding:20px 40px;border-radius:60px;margin:0}
+@keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.title,h2,.statement{animation:rise 600ms cubic-bezier(.2,.7,.2,1) both}
+.lede{animation:rise 600ms cubic-bezier(.2,.7,.2,1) both;animation-delay:120ms}
+.body,.cards,.split,.pills,.tbl{animation:rise 600ms cubic-bezier(.2,.7,.2,1) both;animation-delay:240ms}
+.pielabel{position:absolute;width:240px;margin:0;text-align:center;font-family:'Playfair Display',Georgia,serif;font-weight:600;font-size:44px;line-height:1.1}
+.pl-dark{color:#1C1410}
+.pl-light{color:#F4EAD5}
+.legend{position:absolute;left:900px;top:330px;width:892px;display:flex;flex-direction:column;gap:32px}
+.lg-row{display:flex;flex-direction:row;gap:28px;align-items:flex-start}
+.sw{width:36px;height:36px;margin:6px 0 0 0;flex-shrink:0}
+.sw-a{background:#C9A24A}
+.sw-t{background:#F4EAD5}
+.sw-b{background:#7A1F1A;border:2px solid #8A8478}
+.lg-row .ch{font-family:'Playfair Display',Georgia,serif;font-weight:600;font-size:44px;line-height:1.05;margin:0 0 8px 0}
+.lg-row .ct{font-size:32px;line-height:1.4;color:#C9BBA0;margin:0}
+.legend .lede{margin:16px 0 0 0;width:892px}
+section.brick{background:#5E2E22}
+.brickbg{position:absolute;left:0;top:0;width:1920px;height:1080px}
+.polaroid{position:absolute;width:440px;background:#F6F1E4;padding:24px 24px 28px 24px;box-sizing:border-box;box-shadow:0 18px 40px rgba(10,6,4,.55)}
+.photo{width:392px;height:392px;background:#2B2723;display:flex;align-items:center;justify-content:center}
+.photo .ph{font-family:'Courier Prime','Courier New',monospace;font-size:24px;color:#9A938A;margin:0}
+.pname{font-family:'Caveat','Brush Script MT',cursive;font-weight:700;font-size:72px;line-height:1;color:#1C1410;margin:20px 0 4px 0}
+.prole{text-transform:uppercase;font-family:'Courier Prime','Courier New',monospace;font-size:24px;letter-spacing:2px;color:#5A4632;margin:0}
+.tape{position:absolute;width:150px;height:44px;background:#E6DCC0;opacity:.85}
+.mock{width:1000px;height:600px;background:#F4EAD5;border:14px solid #2A2722;border-radius:12px;padding:52px;box-sizing:border-box;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.mock .eyebrow{font-family:'Courier Prime','Courier New',monospace;font-size:24px;letter-spacing:3px;color:#8E2A22;margin:0 0 16px 0}
+.mock .mtitle{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:64px;line-height:1.05;color:#1C1410;margin:0 0 36px 0}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:28px 40px}
+.mcell{border-top:3px solid #1C1410;padding:14px 0 0 0}
+.mcell .ml{font-family:'Courier Prime','Courier New',monospace;font-size:24px;letter-spacing:2px;color:#5A4632;margin:0 0 6px 0}
+.mcell .mv{font-size:32px;line-height:1.3;color:#1C1410;margin:0}
+.mock .count{font-family:'Courier Prime','Courier New',monospace;font-size:24px;color:#5A4632;margin:0;text-align:right}
+.pitchrow{display:flex;flex-direction:row;gap:64px;align-items:flex-start}
+.pitchside{width:600px;display:flex;flex-direction:column;gap:40px}
+.take .ct2{font-size:32px;line-height:1.4;margin:0;color:#1C1410}
+.tv{position:absolute;width:480px;height:300px;padding:24px;box-sizing:border-box;border-radius:28px;display:flex;flex-direction:row;gap:20px;box-shadow:0 24px 48px rgba(0,0,0,.55)}
+.tv-wood{background:#6B4A33}
+.tv-beige{background:#CFC3A6}
+.tv-gray{background:#4A4946}
+.screen{width:336px;height:252px;border:6px solid #1A1814;border-radius:34px;overflow:hidden;background:#0B0B0A;box-sizing:border-box}
+.tvimg{width:324px;height:240px;object-fit:cover}
+.panel{width:76px;display:flex;flex-direction:column;align-items:center;gap:16px;padding:8px 0 0 0}
+.knob{width:44px;height:44px;background:#C9B27C;border:4px solid #2A2420}
+.grill{width:56px;height:80px;background:repeating-linear-gradient(180deg,#2A2420 0px,#2A2420 4px,rgba(0,0,0,0) 4px,rgba(0,0,0,0) 10px)}
+.lookcol{width:620px;display:flex;flex-direction:column}
+.lookcol .lede{width:620px}
+.lk{border-top:4px solid #C9A24A;padding:20px 0 0 0;margin:0 0 28px 0}
+.lk .ch{font-family:'Playfair Display',Georgia,serif;font-weight:600;font-size:44px;line-height:1.05;margin:0 0 10px 0}
+.lk .ct{font-size:32px;line-height:1.4;color:#C9BBA0;margin:0}
+.tv,.polaroid,.mock{animation:rise 700ms cubic-bezier(.2,.7,.2,1) both;animation-delay:200ms}
+.hand{position:absolute;margin:0;font-family:'Caveat','Brush Script MT',cursive;font-weight:700;font-size:52px;line-height:1.2;color:#F4EAD5;white-space:nowrap}
+.pres{position:absolute;left:396px;top:116px;width:1128px;height:568px;box-sizing:border-box;padding:44px 52px;background:#F4EAD5;display:flex;flex-direction:column}
+.peb{font-family:'Courier Prime','Courier New',monospace;font-size:24px;letter-spacing:3px;color:#8E2A22;margin:0 0 10px 0}
+.ptitle{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:64px;line-height:1;color:#1C1410;margin:0 0 16px 0}
+.plede{font-size:32px;line-height:1.3;color:#1C1410;margin:0 0 28px 0}
+.pcards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px}
+.pcard{border-top:4px solid #C9A24A;padding:16px 0 0 0}
+.pch{font-family:'Playfair Display',Georgia,serif;font-weight:600;font-size:32px;line-height:1.1;color:#1C1410;margin:0 0 8px 0}
+.pct{font-size:24px;line-height:1.35;color:#5A4632;margin:0}
+.hand-ink{position:absolute;margin:0;font-family:'Caveat','Brush Script MT',cursive;color:#1F2A44;text-align:center}
+.hc{font-weight:700;font-size:56px;line-height:1.2}
+.hn{font-weight:700;font-size:44px;line-height:1.2}
+.hnote{font-weight:500;font-size:34px;line-height:1.15;color:#3A4560}
+.htitle{font-weight:700;font-size:64px;line-height:1.1;text-align:left}
+.hside{font-weight:500;font-size:36px;color:#8A3A2A}
+.sticky{position:absolute;width:250px;height:230px;padding:22px;box-sizing:border-box;box-shadow:0 10px 22px rgba(0,0,0,.45)}
+.stxt{font-family:'Caveat','Brush Script MT',cursive;font-weight:700;font-size:40px;line-height:1.1;color:#1C1410;margin:0}
+.tank{position:absolute;left:1135px;top:770px;width:400px;padding:24px;box-sizing:border-box;background:#C9A24A;border-radius:12px}
+.tankt{font-family:'Playfair Display',Georgia,serif;font-weight:600;font-size:32px;line-height:1.1;color:#1C1410;margin:0;text-align:center}
+.tankout{position:absolute;left:1135px;top:935px;width:400px;margin:0;text-align:center;font-family:'Caveat','Brush Script MT',cursive;font-weight:700;font-size:52px;color:#F4EAD5}
+.sticky,.pres{animation:rise 700ms cubic-bezier(.2,.7,.2,1) both;animation-delay:200ms}
+.frame{position:absolute;left:48px;top:48px;width:1824px;height:984px;box-sizing:border-box;border:2px solid #C9A24A}
+.frame2{position:absolute;left:62px;top:62px;width:1796px;height:956px;box-sizing:border-box;border:1px solid #C9A24A;opacity:.6}
+.accent .frame,.accent .frame2{border-color:#1C1410}
+h2 .it,.statement .it{font-style:italic}
+.pimg{width:392px;height:392px;object-fit:cover}
+.marker{position:absolute;margin:0;font-family:'Caveat','Brush Script MT',cursive;font-weight:700;font-size:56px;line-height:1.1;color:#E8382C;white-space:nowrap;text-shadow:0 2px 6px rgba(0,0,0,.9),0 0 14px rgba(0,0,0,.8)}
+.titlecard{position:absolute;left:460px;top:40px;width:1000px;padding:24px 40px 28px 40px;box-sizing:border-box;background:rgba(28,20,16,.82);display:flex;flex-direction:column;align-items:center}
+.rec-c{justify-content:center;margin:0 0 12px 0}
+.tc-h{margin:0;text-align:center}
+section.photo-bleed{background:#1C1410}
+.bgimg{position:absolute;left:0;top:0;width:1920px;height:1080px;object-fit:cover}
+.grain{position:absolute;left:0;top:0;width:1920px;height:1080px;object-fit:cover;opacity:.6}
+section.curtain,section.scene{background:#1C1410}
+.cshade{position:absolute;left:0;top:0;width:1920px;height:1080px;background:radial-gradient(ellipse at center,rgba(20,4,4,0) 0%,rgba(20,4,4,.55) 100%)}
+.card-title,.card-h{font-family:'Playfair Display',Georgia,serif;font-style:italic;text-transform:uppercase;color:#F2E6D0;text-shadow:2px 2px 0 #4A0C0C,4px 4px 0 #4A0C0C,6px 6px 0 #3A0909,8px 8px 0 #3A0909,10px 10px 0 #2A0606,12px 12px 0 #2A0606,14px 16px 24px rgba(0,0,0,.6)}
+.card-title{font-size:200px;font-weight:800;line-height:1.05;text-align:center;letter-spacing:4px;margin:0}
+.card-h{font-weight:800;letter-spacing:2px}
+.in{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:700;font-size:56px;color:#F2E6D0;text-align:center;margin:0;text-shadow:3px 3px 0 #3A0909}
+.cardsub{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:44px;color:#F2E6D0;text-align:center;margin:0;text-shadow:2px 2px 0 #3A0909,4px 4px 10px rgba(0,0,0,.7)}
+.cardmeta{font-family:'Courier Prime','Courier New',monospace;font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#E9D9BC;text-align:center;margin:0;text-shadow:2px 2px 6px rgba(0,0,0,.9)}
+.tvclip{position:absolute;object-fit:cover;border-radius:22px}
+.lscrim{position:absolute;left:0;top:0;width:1100px;height:1080px;background:linear-gradient(90deg,rgba(18,10,6,.82) 0%,rgba(18,10,6,.55) 55%,rgba(18,10,6,0) 100%)}
+.bshade{position:absolute;left:0;top:0;width:1920px;height:1080px;background:linear-gradient(180deg,rgba(20,10,6,.55) 0%,rgba(20,10,6,0) 30%,rgba(20,10,6,0) 75%,rgba(20,10,6,.45) 100%)}
+.pres2{position:absolute;left:548px;top:244px;width:828px;height:480px;box-sizing:border-box;padding:28px 36px;display:flex;flex-direction:column}
+.pres2 .ptitle{font-size:56px;font-style:italic;color:#3A0909}
+.pres2 .plede{font-size:28px;margin:0 0 22px 0;color:#2A1A10}
+.pres2 .pcards{gap:24px}
+.pres2 .pcard{border-top:4px solid #7A1F1A}
+.pres2 .pch{font-size:28px;color:#2A1A10}
+.pres2 .pct{font-size:24px;color:#4A3424}
+.gshade{position:absolute;left:0;top:0;width:1920px;height:1080px;background:linear-gradient(180deg,rgba(18,10,6,.7) 0%,rgba(18,10,6,.35) 40%,rgba(18,10,6,.35) 60%,rgba(18,10,6,.85) 100%)}
+.plaque{position:absolute;left:510px;top:330px;width:900px;padding:40px 48px;box-sizing:border-box;background:#5E1210;border:3px solid #C9A24A;box-shadow:0 30px 60px rgba(0,0,0,.6);display:flex;flex-direction:column;align-items:center;gap:12px}
+.plq-eb{font-family:'Courier Prime','Courier New',monospace;font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#E9D9BC;margin:0}
+.plq-t{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:800;font-size:72px;line-height:1.05;text-transform:uppercase;text-align:center;color:#F2E6D0;margin:0;text-shadow:2px 2px 0 #2A0606,4px 4px 0 #2A0606,6px 6px 0 #1A0404,8px 10px 16px rgba(0,0,0,.6)}
+.roombody{position:absolute;left:128px;top:720px;width:1664px}
+.coverband{position:absolute;left:0;top:712px;width:1920px;height:200px;background:linear-gradient(180deg,rgba(14,3,3,0) 0%,rgba(14,3,3,.78) 22%,rgba(14,3,3,.78) 78%,rgba(14,3,3,0) 100%)}
+.cardsub{font-size:52px;font-weight:700}
+.cardmeta{font-size:28px;color:#F2E6D0}
+.ctitle{position:absolute;left:360px;top:70px;width:1200px;display:flex;flex-direction:column;align-items:center}
+.pname2{position:absolute;width:220px;margin:0;text-align:center;font-family:'Caveat','Brush Script MT',cursive;font-weight:700;font-size:48px;line-height:1;color:#1F2A44}
+.prole2{position:absolute;width:360px;margin:0;text-align:center;font-family:'Courier Prime','Courier New',monospace;font-size:26px;letter-spacing:3px;text-transform:uppercase;color:#F2E6D0;text-shadow:0 2px 6px rgba(0,0,0,.95),0 0 12px rgba(0,0,0,.8)}
+.chalk{position:absolute;margin:0;font-family:'Caveat','Brush Script MT',cursive;font-weight:700;color:#EEEAE0;opacity:.93}
+.chalk-title{font-size:88px;line-height:1.1;text-align:center}
+.chalk-l{font-size:56px;text-align:center;line-height:1.2}
+.chalk-foot{font-size:44px;text-align:center;line-height:1.2;color:#E8D9A8}
+.chalkleg{position:absolute;left:1000px;top:330px;width:760px;display:flex;flex-direction:column;gap:36px}
+.chalkleg .chalk{position:static}
+.chalk-h{font-size:60px;line-height:1.1;color:#E8B84A}
+.chalk-t{font-size:44px;line-height:1.15}
+.pres3{position:absolute;left:505px;top:196px;width:1015px;height:600px;box-sizing:border-box;padding:40px 52px;display:flex;flex-direction:column}
+.pres3 .ptitle{font-size:72px;font-style:italic;color:#3A0909}
+.pres3 .plede{font-size:32px;margin:0 0 30px 0;color:#2A1A10}
+.pres3 .pcards{gap:32px}
+.pres3 .pcard{border-top:4px solid #7A1F1A}
+.pres3 .pch{font-size:32px;color:#2A1A10}
+.pres3 .pct{font-size:26px;line-height:1.35;color:#4A3424}
+.lookleft{position:absolute;left:72px;top:90px;width:520px;display:flex;flex-direction:column}
+.roomband{position:absolute;left:0;top:640px;width:1920px;height:440px;background:linear-gradient(180deg,rgba(16,9,5,0) 0%,rgba(16,9,5,.88) 32%,rgba(16,9,5,.92) 100%)}
+.roomtext{position:absolute;left:128px;top:650px;width:1664px;display:flex;flex-direction:column}
+.topfade{position:absolute;left:0;top:0;width:1920px;height:340px;background:linear-gradient(180deg,rgba(12,6,4,.85) 0%,rgba(12,6,4,.55) 55%,rgba(12,6,4,0) 100%)}
+.frame{border-color:#C9A24A;opacity:.85}
+.credit{position:absolute;left:0;top:1000px;width:1920px;margin:0;text-align:center;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:24px;letter-spacing:2px;color:#E2C27A;text-shadow:0 1px 4px rgba(0,0,0,.9)}
+.screen2{position:absolute;left:250px;top:280px;width:1000px;height:600px;box-sizing:border-box;padding:48px 56px;background:#F4EAD5;border:14px solid #2A1A10;box-shadow:0 0 0 3px #C9A24A,0 30px 80px rgba(0,0,0,.7),0 0 160px rgba(255,220,160,.25);display:flex;flex-direction:column}
+.eyebrow2{font-family:'Courier Prime','Courier New',monospace;font-size:24px;letter-spacing:3px;color:#8E2A22;margin:0 0 14px 0}
+.mtitle2{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:800;font-size:60px;line-height:1.05;color:#3A0909;margin:0 0 34px 0}
+.mgrid2{display:grid;grid-template-columns:1fr 1fr;gap:28px 44px}
+.mcell2{border-top:3px solid #7A1F1A;padding:14px 0 0 0}
+.ml2{font-family:'Courier Prime','Courier New',monospace;font-size:24px;letter-spacing:2px;color:#5A4632;margin:0 0 6px 0}
+.mv2{font-family:'Bodoni Moda',Georgia,serif;font-size:36px;line-height:1.2;color:#1C1410;margin:0}
+.count2{font-family:'Courier Prime','Courier New',monospace;font-size:24px;color:#5A4632;margin:auto 0 0 0;text-align:right}
+.onetake{position:absolute;left:1340px;top:380px;width:420px;padding:44px 32px;box-sizing:border-box;border:3px solid #C9A24A;outline:none;background:rgba(20,6,4,.72);display:flex;flex-direction:column;align-items:center;gap:8px}
+.ot-eb{font-family:'Courier Prime','Courier New',monospace;font-size:24px;letter-spacing:6px;color:#E2C27A;margin:0}
+.ot-t{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:800;font-size:96px;line-height:1;text-transform:uppercase;text-align:center;color:#F2E6D0;margin:0;text-shadow:2px 2px 0 #4A0C0C,4px 4px 0 #3A0909,6px 6px 0 #2A0606,8px 10px 16px rgba(0,0,0,.6)}
+.ot-s{font-family:'Bodoni Moda',Georgia,serif;font-style:italic;font-size:32px;color:#E9D9BC;margin:8px 0 0 0;text-align:center}
+.vtitle{position:absolute;margin:0;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:800;font-size:260px;line-height:1;text-transform:uppercase;letter-spacing:6px;color:#F2E6D0;text-shadow:2px 3px 0 #5A0E0E,4px 6px 0 #4A0C0C,6px 9px 0 #4A0C0C,8px 12px 0 #3A0909,10px 15px 0 #3A0909,12px 18px 0 #2A0606,14px 21px 0 #2A0606,24px 36px 30px rgba(0,0,0,.65)}
+.credits{position:absolute;left:260px;top:820px;width:1400px;display:grid;grid-template-columns:1fr 360px 1fr;align-items:center;gap:24px}
+.cr-col{display:flex;flex-direction:column;align-items:center}
+.cr-mid{display:flex;flex-direction:column;align-items:center;gap:10px}
+.cr{font-family:'Cinzel',Georgia,serif;font-weight:600;font-size:26px;line-height:1.25;letter-spacing:4px;text-transform:uppercase;color:#F2E6D0;margin:0;text-align:center;text-shadow:2px 2px 0 #3A0909}
+.cr-big{font-size:34px;font-weight:700}
+.cr-sm{font-family:'Cinzel',Georgia,serif;font-weight:700;font-size:28px;letter-spacing:6px;text-transform:uppercase;color:#E2C27A;margin:0;text-shadow:2px 2px 0 #3A0909}
+.cr-gem{width:22px;height:22px;background:#E2C27A}
+.botfade{position:absolute;left:0;top:520px;width:1920px;height:560px;background:linear-gradient(180deg,rgba(14,8,5,0) 0%,rgba(14,8,5,.75) 40%,rgba(14,8,5,.9) 100%)}
+.showtext{position:absolute;left:128px;top:640px;width:1664px;display:flex;flex-direction:column}
+.cblock{position:absolute;left:460px;top:735px;width:1000px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.cb1,.cb2,.cb3{font-family:'Bodoni Moda',Georgia,serif;text-transform:uppercase;text-align:center;color:#F2E6D0;margin:0;text-shadow:2px 2px 0 #3A0909,3px 3px 6px rgba(0,0,0,.6)}
+.cb1{font-weight:700;font-size:32px;letter-spacing:4px}
+.cb2{font-weight:700;font-size:24px;letter-spacing:6px;color:#E2C27A}
+.cb3{font-weight:700;font-size:24px;letter-spacing:5px}
+.cblock{left:360px;width:1200px}
+.cbrow{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:36px;margin:14px 0 0 0}
+.cblogo{object-fit:contain}
+.cb3{line-height:1.35}
+.cb1,.cb2,.cb3{text-shadow:1px 1px 0 #3A0909,2px 2px 0 #3A0909,3px 3px 0 #2E0707,4px 4px 0 #2E0707,5px 5px 0 #220505,6px 6px 0 #220505,7px 8px 4px rgba(0,0,0,.7),0 0 18px rgba(0,0,0,.55)}
+.showtl{position:absolute;left:96px;top:80px;width:640px;display:flex;flex-direction:column}
+section.bm{background:#F3E7C9}
+.bm-eyebrow{position:absolute;margin:0;font-family:'Courier Prime','Courier New',monospace;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#1E2A3A}
+.bm-title{position:absolute;margin:0;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:900;font-size:110px;line-height:1;color:#D2452E;text-shadow:3px 3px 0 #1E2A3A,6px 6px 0 #1E2A3A,9px 9px 0 #E2A72E}
+.bm-node{position:absolute;margin:0;text-align:center;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:900;font-size:48px;line-height:1.1;text-transform:uppercase;color:#1E2A3A}
+.bm-center{position:absolute;margin:0;text-align:center;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:900;font-size:44px;line-height:1;text-transform:uppercase;color:#F3E7C9}
+.bm-burst{position:absolute;margin:0;text-align:center;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:900;font-size:36px;line-height:1.05;color:#F3E7C9}
+.bm-steps{position:absolute;left:1180px;top:250px;width:640px;display:flex;flex-direction:column;gap:30px}
+.bm-step{display:flex;flex-direction:row;gap:24px;align-items:flex-start}
+.bm-num{width:64px;height:64px;flex-shrink:0;margin:0;border-radius:32px;border:5px solid #1E2A3A;box-sizing:border-box;text-align:center;font-family:'Playfair Display',Georgia,serif;font-weight:900;font-size:34px;line-height:54px;color:#F3E7C9}
+.bm-h{font-family:'Playfair Display',Georgia,serif;font-weight:800;font-size:36px;line-height:1.1;color:#1E2A3A;margin:2px 0 8px 0}
+.bm-t{font-family:'Bodoni Moda',Georgia,serif;font-size:28px;line-height:1.3;color:#3A3226;margin:0}
+.bm-kicker{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:32px;line-height:1.25;color:#D2452E;margin:12px 0 0 0;padding:20px 0 0 0;border-top:4px solid #1E2A3A}
+.ptag{position:absolute;width:340px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.ptag-n{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:800;font-size:42px;line-height:1.05;color:#1C1410;margin:0;text-align:center}
+.ptag-r{font-family:'Bodoni Moda',Georgia,serif;font-weight:700;font-size:24px;letter-spacing:2px;text-transform:uppercase;color:#6E1C17;margin:0;text-align:center}
+.castnote{font-family:'Bodoni Moda',Georgia,serif;font-weight:600;font-style:italic;font-size:28px;color:#F2E6D0;margin:6px 0 0 0;text-align:center;text-shadow:2px 2px 0 #2E0707,4px 4px 8px rgba(0,0,0,.8)}
+.ptag{width:380px;gap:0}
+.ptag-n{font-size:36px;line-height:1.05}
+.ptag-r{font-size:24px;letter-spacing:0;line-height:1.2;white-space:nowrap}
+.ptag-n{font-size:32px;line-height:1.05}
+.pc-head{position:absolute;margin:0;font-family:'Courier Prime','Courier New',monospace;font-weight:700;font-size:28px;letter-spacing:4px;text-transform:uppercase;color:#1E2A3A}
+.pc-title{position:absolute;margin:0;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:900;font-size:60px;line-height:1.05;color:#D2452E}
+.pc-grid{position:absolute;left:170px;top:530px;width:920px;display:grid;grid-template-columns:1fr 1fr;gap:26px 48px}
+.pc-cell{border-top:5px solid #1E2A3A;padding:12px 0 0 0}
+.pc-l{font-family:'Courier Prime','Courier New',monospace;font-weight:700;font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#2F7F7A;margin:0 0 4px 0}
+.pc-v{font-family:'Bodoni Moda',Georgia,serif;font-weight:700;font-size:34px;line-height:1.2;color:#1E2A3A;margin:0}
+.pc-count{position:absolute;margin:0;text-align:right;font-family:'Courier Prime','Courier New',monospace;font-size:24px;color:#1E2A3A}
+.ob-eb{position:absolute;margin:0;text-align:center;font-family:'Courier Prime','Courier New',monospace;font-weight:700;font-size:28px;letter-spacing:8px;text-transform:uppercase;color:#F3E7C9}
+.ob-t{position:absolute;margin:0;text-align:center;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:900;font-size:92px;line-height:0.95;text-transform:uppercase;color:#F3E7C9;text-shadow:3px 3px 0 #1E2A3A,6px 6px 0 #1E2A3A}
+.ob-s{position:absolute;margin:0;text-align:center;font-family:'Bodoni Moda',Georgia,serif;font-style:italic;font-weight:700;font-size:26px;color:#F3E7C9}
+.bm-note{position:absolute;margin:0;font-family:'Bodoni Moda',Georgia,serif;font-style:italic;font-size:24px;color:#3A3226}
+.rscrim{position:absolute;left:1000px;top:0;width:920px;height:1080px;background:linear-gradient(270deg,rgba(18,10,6,.9) 0%,rgba(18,10,6,.75) 45%,rgba(18,10,6,0) 100%)}
+.rscrim{left:520px;width:1400px;background:linear-gradient(270deg,rgba(18,10,6,.9) 0%,rgba(18,10,6,.78) 50%,rgba(18,10,6,0) 100%)}
+section.vt{background:#EFE2C2}
+.vt-tc{font-family:'Oswald',Arial,sans-serif;font-weight:500;font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#8E2A22;margin:0}
+.vt-head{position:absolute;display:flex;flex-direction:column}
+.vt-eyebrow{font-family:'Oswald',Arial,sans-serif;font-weight:600;font-size:30px;letter-spacing:6px;text-transform:uppercase;color:#1A1A1A;margin:0 0 4px 0}
+.vt-title{font-family:'Oswald',Arial,sans-serif;font-weight:700;font-size:104px;line-height:0.95;letter-spacing:0;text-transform:uppercase;color:#1A1A1A;margin:0}
+.vt-grid{position:absolute;display:grid;grid-template-columns:1fr 1fr;gap:28px 56px}
+.vt-h{font-family:'Oswald',Arial,sans-serif;font-weight:700;font-size:40px;line-height:1;text-transform:uppercase;color:#2B2F6B;margin:0 0 6px 0}
+.vt-b{font-family:'Bodoni Moda',Georgia,serif;font-weight:700;font-size:30px;line-height:1.25;color:#1A1A1A;margin:0}
+.vt-label{position:absolute;margin:0;text-align:center;font-family:'Oswald',Arial,sans-serif;font-weight:600;font-size:24px;line-height:1;text-transform:uppercase;color:#1A1A1A}
+.vt-note{position:absolute;margin:0;text-align:center;font-family:'Bodoni Moda',Georgia,serif;font-style:italic;font-size:24px;color:#3A3226}
+.vt-credit{position:absolute;left:0;top:1010px;width:1920px;margin:0;text-align:center;font-family:'Oswald',Arial,sans-serif;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#1A1A1A}
+.board{position:absolute;width:300px;height:360px;box-sizing:border-box;padding:28px 22px;display:flex;flex-direction:column;gap:14px}
+.vt-small{font-family:'Oswald',Arial,sans-serif;font-weight:600;font-size:24px;letter-spacing:2px;text-transform:uppercase;color:#2B2F6B;margin:0;line-height:1.1}
+.board-t{font-family:'Oswald',Arial,sans-serif;font-weight:700;font-size:54px;line-height:1;text-transform:uppercase;color:#1A1A1A;margin:0}
+.pl-col{position:absolute;left:1000px;top:64px;width:820px;display:flex;flex-direction:column}
+.pl-eyebrow{font-family:'Bodoni Moda',Georgia,serif;font-weight:700;font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#3A3226;margin:0 0 6px 0}
+.pl-title{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:800;font-size:88px;line-height:1;text-transform:uppercase;color:#8E2A22;margin:0;text-shadow:2px 2px 0 #3A0909,4px 4px 0 #3A0909,6px 6px 0 #2A0606,8px 8px 0 #2A0606,10px 12px 14px rgba(0,0,0,.25)}
+.pl-pair{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:800;font-size:52px;line-height:1.05;color:#1C1410;margin:0 0 18px 0}
+.pl-rows{display:flex;flex-direction:column;border-top:3px solid #1C1410}
+.pl-row{display:flex;flex-direction:row;align-items:baseline;gap:24px;padding:12px 0;border-bottom:1px solid #8C7A5A}
+.pl-l{width:230px;flex-shrink:0;font-family:'Bodoni Moda',Georgia,serif;font-weight:700;font-size:24px;letter-spacing:3px;text-transform:uppercase;color:#8E2A22;margin:0}
+.pl-v{font-family:'Bodoni Moda',Georgia,serif;font-weight:600;font-size:32px;line-height:1.2;color:#1C1410;margin:0}
+.pl-cap{font-family:'Bodoni Moda',Georgia,serif;font-style:italic;font-weight:600;font-size:30px;color:#1C1410;margin:20px 0 0 0}
+.stamp{position:absolute;left:1440px;top:880px;width:380px;padding:12px 18px;box-sizing:border-box;border:4px solid #B3261E;border-radius:6px;transform:rotate(-6deg);opacity:.85;display:flex;flex-direction:column;align-items:center}
+.stamp-t{font-family:'Bodoni Moda',Georgia,serif;font-weight:800;font-size:34px;letter-spacing:4px;text-transform:uppercase;color:#B3261E;margin:0}
+.stamp-s{font-family:'Bodoni Moda',Georgia,serif;font-weight:700;font-size:24px;letter-spacing:1px;color:#B3261E;margin:0}
+.pilot2 .pl-eyebrow,.pilot2 .pl-l,.pilot2 .pl-v,.pilot2 .stamp-t,.pilot2 .stamp-s,.pilot2 .tc{font-family:'Oswald',Arial,sans-serif}
+.pilot2 .pl-eyebrow{font-weight:500;letter-spacing:4px}
+.pilot2 .pl-l{font-weight:600;font-size:26px;letter-spacing:2px}
+.pilot2 .pl-v{font-weight:500;font-size:34px}
+.pilot2 .stamp-t{font-weight:700;letter-spacing:3px}
+.pilot2 .stamp-s{font-weight:500}
+.pl-big{position:absolute;margin:0;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:800;font-size:150px;line-height:1;text-transform:uppercase;color:#8E2A22;text-shadow:3px 3px 0 #3A0909,6px 6px 0 #3A0909,9px 9px 0 #2A0606,12px 12px 0 #2A0606,14px 16px 18px rgba(0,0,0,.25)}
+.pl-bigsub{position:absolute;margin:0;font-family:'Oswald',Arial,sans-serif;font-weight:500;font-size:40px;letter-spacing:3px;text-transform:uppercase;color:#1C1410}
+.pl-lab{position:absolute;margin:0;text-align:center;font-family:'Oswald',Arial,sans-serif;font-weight:600;font-size:24px;line-height:1.3;text-transform:uppercase;color:#1C1410}
+.memo{position:absolute;left:661px;top:90px;width:582px;height:360px;box-sizing:border-box;padding:24px 28px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.memo-sub{font-family:'Bodoni Moda',Georgia,serif;font-weight:700;font-style:italic;font-size:30px;line-height:1.25;color:#1C1410;text-align:center;margin:18px 0 0 0}
+.pilot2 .pl-vs{font-size:28px;line-height:1.3;font-weight:400}
+.flat-title{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:800;font-size:96px;line-height:1;text-transform:uppercase;color:#8E2A22;margin:0;text-shadow:none}
+.memo-sub{margin:12px 0 0 0;font-size:28px}
+.stamp2{align-self:flex-start;margin:16px 0 0 0;padding:8px 16px;border:4px solid #B3261E;border-radius:6px;transform:rotate(-3deg);opacity:.9;display:flex;flex-direction:column;align-items:center}
+.pilot2 .stamp2 .stamp-t{font-family:'Oswald',Arial,sans-serif;font-weight:700;font-size:30px;letter-spacing:3px;text-transform:uppercase;color:#B3261E;margin:0}
+.pilot2 .stamp2 .stamp-s{font-family:'Oswald',Arial,sans-serif;font-weight:500;font-size:24px;color:#B3261E;margin:0}
+
+section{font-family:'Oswald',Arial,sans-serif}
+.lede{font-weight:500;line-height:1.25}
+.body,.ct,.pct,.plede{font-weight:400;line-height:1.4}
+.memo-sub,.ptag-r,.vt-b,.vt-note,.bm-t,.bm-note,.pc-v,.mv2,.ot-s,.castnote,.pl-eyebrow,.pl-l,.pl-v,.pl-cap,.stamp-t,.stamp-s,.ob-s{font-family:'Oswald',Arial,sans-serif;font-style:normal}
+.memo-sub{font-weight:500}
+.ptag-r{font-weight:500;letter-spacing:1px}
+.pl-v{font-weight:500}
+.pl-cap{font-weight:400;font-size:28px;line-height:1.3}
+.cb1,.cb2,.cb3{font-family:'Oswald',Arial,sans-serif}
+.cb1{font-weight:600}
+.cb2,.cb3{font-weight:500}
+.aud-lab{position:absolute;margin:0;text-align:center;font-family:'Oswald',Arial,sans-serif;font-weight:600;font-size:32px;line-height:1.1;letter-spacing:1px;text-transform:uppercase;color:#B3261E}
+.bshade2{position:absolute;left:0;top:560px;width:1920px;height:520px;background:linear-gradient(180deg,rgba(16,9,5,0) 0%,rgba(16,9,5,.78) 38%,rgba(16,9,5,.9) 100%)}
+.aud-ph{color:#E0332A;text-shadow:0 2px 4px rgba(0,0,0,.95),0 0 12px rgba(0,0,0,.85)}
+.sweb{position:absolute;display:flex;flex-direction:column;gap:4px}
+.sw-n{font-family:'Oswald',Arial,sans-serif;font-weight:600;font-size:30px;line-height:1.1;letter-spacing:1px;text-transform:uppercase;color:#8E2A22;margin:0}
+.sw-d{font-family:'Oswald',Arial,sans-serif;font-weight:400;font-size:26px;line-height:1.25;color:#1C1410;margin:0}
+.scr{position:absolute;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center}
+.scr-row{display:flex;flex-direction:row;gap:16px;align-items:baseline;padding:6px 0;border-top:2px solid #C9B48A}
+.scr-l{width:150px;flex-shrink:0;font-family:'Oswald',Arial,sans-serif;font-weight:600;font-size:21px;letter-spacing:1px;text-transform:uppercase;color:#8E2A22;margin:0}
+.scr-v{font-family:'Oswald',Arial,sans-serif;font-weight:400;font-size:24px;line-height:1.2;color:#1C1410;margin:0}
+.scr2 .scr-l{width:180px;font-size:24px}.scr2 .scr-v{font-size:27px}.scr2 .scr-row{padding:8px 0}
+.rec{display:none!important}
+.scr3 .scr-l{width:200px;font-size:26px}.scr3 .scr-v{font-size:30px}.scr3 .scr-row{padding:9px 0}
+.grain{display:none!important}
+.tex{position:absolute;left:0;top:0;width:1920px;height:1080px;object-fit:cover;pointer-events:none}
+.tint{position:absolute;left:0;top:0;width:1920px;height:1080px;background:rgba(112,92,48,.09);pointer-events:none}
+.hw-board{position:absolute;box-sizing:border-box;background:#C99A5B;border:12px solid #B07A3E;outline:4px solid #1C1410;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:8px;padding:9px}
+.hw-card{position:relative;background:#F6EBD3;border:2px solid #1C1410;padding:9px 6px 4px 7px;box-sizing:border-box;display:flex;flex-direction:column;gap:1px}
+.hw-pin{position:absolute;left:50%;top:-6px;width:11px;height:11px;margin-left:-5px;background:#B3261E;border:2px solid #1C1410;border-radius:50%}
+.hw-t{font-family:'Oswald',Arial,sans-serif;font-weight:700;font-size:13px;line-height:1.05;text-transform:uppercase;color:#8E2A22;margin:0 0 2px 0}
+.hw-b{font-family:'Oswald',Arial,sans-serif;font-weight:400;font-size:11.5px;line-height:1.15;color:#1C1410;margin:0}
+.hw-bub{position:absolute;margin:0;display:flex;align-items:center;justify-content:center;text-align:center;font-family:'Oswald',Arial,sans-serif;font-weight:700;text-transform:uppercase;color:#1E2A3A;line-height:1.05}
+.tex{opacity:.28}
+.frame,.frame2{display:none!important}
+
+</style></head><body>
+<div id="stage"><div id="deck">
+<section id="cover" class="curtain" data-transition="fade">
+<img class="bgimg" src="media/56d14b775468b2914d95b645037461b0.jpg" alt="Red velvet theater curtains">
+<div class="cshade"></div>
+<div class="rec" style="position:absolute;left:96px;top:72px;margin:0;display:flex"><x-shape kind="ellipse" class="dot"></x-shape><p class="tc">REC · 00:00:00:00 · TAKE 1</p></div>
+<h1 class="vtitle" style="left:0;top:150px;width:1920px;text-align:center;transform:rotate(-5deg)">Pitch</h1>
+<h1 class="vtitle" style="left:0;top:390px;width:1920px;text-align:center;transform:rotate(-5deg)">Deck</h1>
+<div class="cblock">
+<p class="cb1">A Scripted Series About Life Inside a Creative Agency</p>
+<p class="cb2">For Artists, By Artists</p>
+<div class="cbrow"><img class="cblogo" src="media/87968c303679b098366e12a0836f5590.png" alt="Respective Collective logo" style="width:104px;height:56px"><p class="cb3">Developed by Respective Collective<br>and After School Program</p><img class="cblogo" src="media/e5221e0a765c722864880f4b5d541297.png" alt="After School Program logo" style="width:59px;height:56px"></div>
+</div>
+
+<div class="frame"></div><div class="frame2"></div>
+<p class="credit">“Pitch Deck” · A Respective Collective Production</p>
+
+</section>
+
+<section id="show" class="scene">
+<video class="bgimg"  src="media/f5eb97ede4572cf652c94e422f8488db.mp4" poster="media/9bc73236d983b113c0c9d77fca9a8b84.webp" autoplay muted loop playsinline preload="auto" aria-label="Clip from The Studio, season 1 episode 1: an agency exec in oversized glasses mid-pitch"></video>
+<div class="lscrim" style="width:900px"></div>
+<div class="showtl">
+<div class="rec"><x-shape kind="ellipse" class="dot"></x-shape><p class="tc">REC · 00:00:33:07 · TAKE 2</p></div>
+<h2 class="card-h" style="margin:0 0 24px 0">The Show</h2>
+<p class="lede" style="width:600px;font-size:36px;margin:0 0 16px 0">At an up-and-coming creative agency, a team has to pitch and execute brand partnerships with talent who are the last people you’d expect.</p>
+<p class="body" style="width:560px;font-size:28px;color:#E9D9BC">Every idea is stranger than the one before, and the team sells each one with total sincerity.</p>
+</div>
+
+<div class="frame"></div><div class="frame2"></div>
+<p class="credit">“Pitch Deck” · A Respective Collective Production</p>
+
+</section>
+
+<section id="98b63d41" class="scene">
+<video class="bgimg"  src="media/626890d26bf296a61b4cc733195ed8ca.mp4" poster="media/7a88b2ab6cfb8fcab0871233453f02d4.webp" autoplay muted loop playsinline preload="auto" aria-label="Man-on-the-street clip: a young man in a shearling coat walking down a busy city sidewalk"></video>
+<div class="rscrim"></div>
+<div class="showtl" style="width:860px;left:980px;top:auto;bottom:96px;align-items:flex-end;text-align:right">
+<div class="rec" style="justify-content:flex-end"><x-shape kind="ellipse" class="dot"></x-shape><p class="tc">REC · 00:01:00:14 · TAKE 3</p></div>
+<h2 class="card-h" style="margin:0 0 22px 0;white-space:nowrap">Why Now</h2>
+<p class="lede" style="width:840px;font-size:44px;margin:0 0 20px 0">Everybody is a creator now, trying to subtly promote brands through their content.</p>
+<p class="body" style="width:820px;font-size:32px;color:#E9D9BC">Pitch Deck takes the content market and satirizes it: a scripted response to the oversaturation of the creator economy that not only comments on the market itself, but creates a perfect plug for brands and guest appearances.</p>
+</div>
+
+<div class="frame"></div><div class="frame2"></div>
+<p class="credit">“Pitch Deck” · A Respective Collective Production</p>
+
+</section>
+
+<section id="characters" class="scene">
+<img class="bgimg" src="media/33c0df26a00c1300734f4ad426c2e925.jpg" alt="A cork bulletin board with a pinned memo and Polaroids of Ryan (CEO), Farza (Creative Director) and Zoe (Social Media Manager)">
+<div class="memo" style="left:560px;top:66px;width:800px;height:300px">
+<div class="rec rec-c" style="margin:0 0 8px 0"><x-shape kind="ellipse" class="dot"></x-shape><p class="tc" style="color:#8E2A22">REC · 00:01:54:04 · TAKE 5</p></div>
+<h2 class="flat-title" style="text-align:center;white-space:nowrap">The Agency</h2>
+<p class="memo-sub">Cast inspiration for the three leads inside the agency</p>
+</div>
+<div class="ptag" style="left:170px;top:883px;transform:rotate(7.1deg)"><p class="ptag-n">Ryan</p><p class="ptag-r">CEO</p></div>
+<div class="ptag" style="left:783px;top:898px;transform:rotate(-3.0deg)"><p class="ptag-n">Farza</p><p class="ptag-r">Creative Director</p></div>
+<div class="ptag" style="left:1375px;top:865px;transform:rotate(-7.4deg)"><p class="ptag-n">Zoe</p><p class="ptag-r">Social Media Manager</p></div>
+
+<div class="frame"></div><div class="frame2"></div>
+<p class="credit">“Pitch Deck” · A Respective Collective Production</p>
+
+</section>
+
+<section id="6c364726" class="scene vt pilot2">
+<img class="bgimg" src="media/e31c5b25887c2e3f54ab0bcd356ec3d4.jpg" alt="Retro poster-style film camera on a dolly with a dashed arrow looping around it, labeled one take and no cuts">
+<svg aria-hidden="true" viewBox="0 0 1920 1080" width="1920" height="1080" style="position:absolute;left:0;top:0;width:1920px;height:1080px"><path d="M1010 222 Q1060 228 1092 262" fill="none" stroke="#1C1410" stroke-width="4" stroke-linecap="round"/><path d="M1086 241 L1092 262 L1072 254" fill="none" stroke="#1C1410" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M965 880 Q1000 850 1012 818" fill="none" stroke="#1C1410" stroke-width="4" stroke-linecap="round"/><path d="M997 832 L1012 818 L1018 838" fill="none" stroke="#1C1410" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<p class="pl-lab" style="left:850px;top:180px;width:200px;font-size:36px">One take</p>
+<p class="pl-lab" style="left:845px;top:880px;width:180px;font-size:36px">No cuts</p>
+<div class="pl-col" style="left:110px;top:90px;width:720px">
+<h2 class="flat-title" style="font-size:84px;line-height:1.02">Pilot Episode: The&nbsp;Pitch</h2>
+<div class="stamp2"><p class="stamp-t">Working Concept</p><p class="stamp-s">Example pairing · subject to change</p></div>
+<p class="pl-pair" style="font-size:46px;margin:20px 0 18px 0">BetterHelp × Big X the Plug</p>
+<div class="pl-rows">
+<div class="pl-row"><p class="pl-l" style="width:190px">The Talent</p><p class="pl-v">Big X the Plug</p></div>
+<div class="pl-row"><p class="pl-l" style="width:190px">The Brand</p><p class="pl-v">BetterHelp</p></div>
+<div class="pl-row"><p class="pl-l" style="width:190px">Synopsis</p><p class="pl-v pl-vs">The agency has to pitch Big X the Plug on a BetterHelp sponsorship: the worst possible fit, sold with total sincerity.</p></div>
+<div class="pl-row"><p class="pl-l" style="width:190px">How It’s Shot</p><p class="pl-v pl-vs">One continuous take. Not every episode will be a one-take, but it’s an engaging way to open the series: it sets up the world and gets people excited about the format.</p></div>
+</div>
+</div>
+
+<p class="credit" style="color:#3A0909;text-shadow:none">“Pitch Deck” · A Respective Collective Production</p>
+
+</section>
+
+<section id="look" class="scene">
+<img class="bgimg" src="media/f5470f517929d60317818cf084d1a763.jpg" alt="Three stacked vintage TVs in an empty room">
+<div class="lscrim" style="width:1150px;background:linear-gradient(90deg,rgba(18,10,6,.7) 0%,rgba(18,10,6,.45) 45%,rgba(18,10,6,0) 100%)"></div>
+<video class="tvclip" style="left:956px;top:136px;width:388px;height:308px;border-radius:40px" src="media/d4f5f427add9c4113e56ddc94deb6c4f.mp4" poster="media/5c9df0109618f7449945ea920618a810.webp" autoplay muted loop playsinline preload="auto" aria-label="Clip from Birdman on the top TV"></video>
+<video class="tvclip" style="left:628px;top:592px;width:396px;height:320px;border-radius:40px" src="media/31b528e12e982b4f27d3c5c7dc4d769d.mp4" poster="media/0b3eadafd24c33ad9c8fa9a67a973df6.webp" autoplay muted loop playsinline preload="auto" aria-label="Clip from The Studio on the bottom-left TV"></video>
+<video class="tvclip" style="left:1256px;top:592px;width:396px;height:312px;border-radius:40px" src="media/4e5ceea22a82c9d3123af4e59343bdfd.mp4" poster="media/a27837c73b3956d83cc1c9a71fcd1452.webp" autoplay muted loop playsinline preload="auto" aria-label="Clip from Babylon on the bottom-right TV"></video>
+<div class="lookleft" style="left:80px;top:64px;width:820px">
+<div class="rec"><x-shape kind="ellipse" class="dot"></x-shape><p class="tc">REC · 00:02:48:18 · TAKE 7</p></div>
+<h2 class="card-h" style="white-space:nowrap;margin:0 0 22px 0">The Look</h2>
+<p class="lede" style="width:800px;font-size:48px;margin:0 0 16px 0">Chaotic, choreographed, continuous.</p>
+<p class="body" style="width:780px;font-size:32px">Handheld, not documentary. The camera is always moving and never stops, chasing the chaos from room to room.</p>
+</div>
+
+<div class="frame"></div><div class="frame2"></div>
+<p class="credit">“Pitch Deck” · A Respective Collective Production</p>
+
+</section>
+
+<section id="triangle" class="scene vt pilot2">
+<img class="bgimg" src="media/7b0ed1cbf08bdb0c3e838740ce86b20f.jpg" alt="Retro poster-style loop: a TV, a megaphone with coins, and a studio microphone connected by dashed arrows">
+<p class="pl-lab" style="left:830px;top:225px;width:240px;font-size:36px">The Show</p>
+<p class="pl-lab" style="left:150px;top:895px;width:300px;font-size:36px">Brands</p>
+<p class="pl-lab" style="left:960px;top:690px;width:150px;font-size:36px">Talent</p>
+<div class="pl-col" style="left:1200px;top:250px;width:670px">
+<h2 class="flat-title" style="font-size:84px;line-height:1.02">The Model</h2>
+<p class="pl-pair" style="font-size:46px;margin:22px 0 18px 0">A show that feeds itself.</p>
+<div class="pl-rows">
+<div class="pl-row"><p class="pl-l" style="width:190px">1 · The Show</p><p class="pl-v pl-vs">Lands the brand partnership. The agency on screen is the show itself.</p></div>
+<div class="pl-row"><p class="pl-l" style="width:190px">2 · Brands</p><p class="pl-v pl-vs">Get unconventional talent behind them, in character.</p></div>
+<div class="pl-row"><p class="pl-l" style="width:190px">3 · Talent</p><p class="pl-v pl-vs">Brings their audience back to the show, and the next brand follows.</p></div>
+</div>
+<p class="pl-cap" style="margin:24px 0 0 0">The show does in real life exactly what the agency does on screen.</p>
+</div>
+
+<p class="credit" style="color:#3A0909;text-shadow:none">“Pitch Deck” · A Respective Collective Production</p>
+
+</section>
+
+<section id="audience" class="photo-bleed">
+<img class="bgimg" src="media/1ee9a67e467e97861b9a888c73286435.jpg" alt="A packed vintage theater audience in 3D glasses, with seven people near the center circled in red and labeled: agency teams, influencers, photographers, videographers, social media strategists, freelancers, marketing directors">
+<div class="topfade" style="height:240px"></div>
+<div class="ctitle" style="top:60px"><h2 class="card-h" style="margin:0;white-space:nowrap">Who’s the Audience</h2></div>
+<svg aria-hidden="true" viewBox="0 0 1920 1080" width="1920" height="1080" style="position:absolute;left:0;top:0;width:1920px;height:1080px"><ellipse cx="630" cy="650" rx="36" ry="46" fill="none" stroke="#D0281F" stroke-width="4"/><path d="M312 612 Q446 661 588 644" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round"/><path d="M570 637 L588 644 L572 655" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="730" cy="728" rx="38" ry="48" fill="none" stroke="#D0281F" stroke-width="4"/><path d="M433 895 Q579 856 692 754" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round"/><path d="M672 759 L692 754 L685 773" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="893" cy="729" rx="38" ry="48" fill="none" stroke="#D0281F" stroke-width="4"/><path d="M899 925 Q914 853 894 783" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round"/><path d="M890 802 L894 783 L908 798" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="790" cy="587" rx="32" ry="40" fill="none" stroke="#D0281F" stroke-width="4"/><path d="M545 290 Q624 447 766 552" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round"/><path d="M757 534 L766 552 L746 549" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="1033" cy="648" rx="36" ry="46" fill="none" stroke="#D0281F" stroke-width="4"/><path d="M1074 308 Q1021 448 1038 596" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round"/><path d="M1045 578 L1038 596 L1027 580" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="1155" cy="655" rx="36" ry="46" fill="none" stroke="#D0281F" stroke-width="4"/><path d="M1381 300 Q1242 431 1178 611" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round"/><path d="M1192 598 L1178 611 L1175 591" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="1393" cy="582" rx="34" ry="44" fill="none" stroke="#D0281F" stroke-width="4"/><path d="M1628 532 Q1525 528 1432 572" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round"/><path d="M1452 573 L1432 572 L1444 556" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<p class="aud-lab aud-ph" style="left:90px;top:560px;width:280px">Agency<br>teams</p>
+<p class="aud-lab aud-ph" style="left:240px;top:905px;width:280px">Influencers</p>
+<p class="aud-lab aud-ph" style="left:760px;top:935px;width:280px">Photographers</p>
+<p class="aud-lab aud-ph" style="left:380px;top:240px;width:280px">Videographers</p>
+<p class="aud-lab aud-ph" style="left:940px;top:214px;width:280px">Social media<br>strategists</p>
+<p class="aud-lab aud-ph" style="left:1260px;top:250px;width:280px">Freelancers</p>
+<p class="aud-lab aud-ph" style="left:1580px;top:470px;width:280px">Marketing<br>directors</p>
+
+<div class="frame"></div><div class="frame2"></div>
+<p class="credit">“Pitch Deck” · A Respective Collective Production</p>
+
+</section>
+
+<section id="brands" class="scene">
+<img class="bgimg" src="media/7581352fa452dfa7bb56bd6c80f68388.jpg" alt="Young agency creatives around a wooden meeting table, all looking up at a wall screen that reads Built for Brands">
+<div class="scr scr3" style="left:491px;top:41px;width:939px;height:546px;padding:34px 52px;justify-content:flex-start">
+<p class="peb" style="margin:0 0 4px 0;font-size:26px">PARTNERSHIP OPPORTUNITY</p>
+<h3 class="flat-title" style="font-size:76px;margin:0 0 10px 0">Built for Brands</h3>
+<p class="plede" style="font-size:32px;margin:0 0 14px 0;font-weight:500">A seed for brands to build themselves into a scripted series.</p>
+<div class="scr-row"><p class="scr-l">Native by Design</p><p class="scr-v">Every episode revolves around a campaign, so the brand is the plot, not an interruption.</p></div>
+<div class="scr-row"><p class="scr-l">Any Stage</p><p class="scr-v">A partner can come in at the pitch, the shoot, the edit, or the fallout.</p></div>
+<div class="scr-row"><p class="scr-l">Real or Fictional</p><p class="scr-v">The influencer or brand can be real or invented, depending on the partner.</p></div>
+</div>
+
+<div class="frame"></div><div class="frame2"></div>
+<p class="credit">“Pitch Deck” · A Respective Collective Production</p>
+
+</section>
+
+<section id="season" class="scene vt pilot2">
+<img class="bgimg" src="media/5ef30222b6e822eb015e7deb7b8fa551.jpg" alt="Retro poster-style story web: a film reel on a starburst connected to six episodes: a flip chart, a DSLR camera, a cracked phone, swapping speech bubbles, a laptop with an edit timeline, and a question mark">
+<h2 class="flat-title" style="position:absolute;left:360px;top:139px;width:1200px;text-align:center;white-space:nowrap;font-size:84px">Season One</h2>
+<div class="sweb" style="left:20px;top:271px;width:460px;align-items:flex-end;text-align:right"><p class="sw-n">Ep 1 · The Pitch</p><p class="sw-d">Pitch Big X the Plug on BetterHelp. One take.</p></div>
+<div class="sweb" style="left:1462px;top:271px;width:420px"><p class="sw-n">Ep 2 · The Brand Shoot</p><p class="sw-d">The campaign goes into production.</p></div>
+<div class="sweb" style="left:1612px;top:478px;width:270px"><p class="sw-n">Ep 3 · Canceled</p><p class="sw-d">The influencer gets canceled the day of launch. Pivot.</p></div>
+<div class="sweb" style="left:1530px;top:748px;width:350px"><p class="sw-n">Ep 4 · Reverse Pitch</p><p class="sw-d">The agency pitches the brand on the talent.</p></div>
+<div class="sweb" style="left:30px;top:748px;width:360px;align-items:flex-end;text-align:right"><p class="sw-n">Ep 5 · The Edit</p><p class="sw-d">An indecisive client.</p></div>
+<div class="sweb" style="left:20px;top:478px;width:290px;align-items:flex-end;text-align:right"><p class="sw-n">Ep 6+ · From the Room</p></div>
+
+<p class="credit" style="color:#3A0909;text-shadow:none">“Pitch Deck” · A Respective Collective Production</p>
+
+</section>
+
+<section id="room" class="scene vt pilot2">
+<img class="bgimg" src="media/9d2ad2ae0f8499a44bf32ba0b064d572.jpg" alt="Retro poster-style process: the team brainstorming around a table, then a cork board of index cards with the season’s episode ideas, then a laptop with script pages and a phone showing a social video feed">
+<h2 class="flat-title" style="position:absolute;left:260px;top:50px;width:1400px;text-align:center;white-space:nowrap;font-size:84px">How We Write It</h2>
+<p class="pl-pair" style="position:absolute;left:360px;top:148px;width:1200px;text-align:center;font-size:38px;margin:0">We start from experience, then heighten it.</p>
+<div class="hw-board" style="left:852px;top:380px;width:330px;height:252px"><div class="hw-card" style="transform:rotate(-2deg)"><span class="hw-pin"></span><p class="hw-t">The Pitch</p><p class="hw-b">• Big X × BetterHelp</p><p class="hw-b">• One take</p></div><div class="hw-card" style="transform:rotate(1.5deg)"><span class="hw-pin"></span><p class="hw-t">Brand Shoot</p><p class="hw-b">• On set with the talent</p></div><div class="hw-card" style="transform:rotate(-1deg)"><span class="hw-pin"></span><p class="hw-t">Canceled</p><p class="hw-b">• Talent canceled at launch</p><p class="hw-b">• Pivot</p></div><div class="hw-card" style="transform:rotate(2deg)"><span class="hw-pin"></span><p class="hw-t">Reverse Pitch</p><p class="hw-b">• Sell the brand on the talent</p></div><div class="hw-card" style="transform:rotate(-1.5deg)"><span class="hw-pin"></span><p class="hw-t">The Edit</p><p class="hw-b">• Indecisive client</p></div><div class="hw-card" style="transform:rotate(1deg)"><span class="hw-pin"></span><p class="hw-t">Ep 6+</p><p class="hw-b">• Ideas from the room</p></div></div>
+<div class="sweb" style="left:187px;top:785px;width:560px;align-items:center;text-align:center"><p class="sw-n">1 · The Room</p><p class="sw-d">The Respective team comes up with ideas from their own experiences.</p></div>
+<div class="sweb" style="left:783px;top:785px;width:460px;align-items:center;text-align:center"><p class="sw-n">2 · The Wall</p><p class="sw-d">Every idea goes up on the wall.</p></div>
+<div class="sweb" style="left:1203px;top:785px;width:640px;align-items:center;text-align:center"><p class="sw-n">3 · The Episodes</p><p class="sw-d">Lucas takes the basis and creates compelling stories out of them.</p></div>
+
+<p class="credit" style="color:#3A0909;text-shadow:none">“Pitch Deck” · A Respective Collective Production</p>
+
+</section>
+
+<section id="fin" class="curtain" data-transition="fade">
+<img class="bgimg" src="media/56d14b775468b2914d95b645037461b0.jpg" alt="Red velvet theater curtains">
+<div class="cshade"></div>
+<h1 class="vtitle" style="left:0;top:330px;width:1920px;text-align:center;transform:rotate(-5deg)">Fin</h1>
+<div style="position:absolute;left:0;top:850px;width:1920px;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:30px">
+<img class="cblogo" src="media/87968c303679b098366e12a0836f5590.png" alt="Respective Collective logo" style="width:112px;height:60px">
+<p class="cb1" style="font-family:'Playfair Display',Georgia,serif;font-size:52px;line-height:1;letter-spacing:0;text-transform:none">×</p>
+<img class="cblogo" src="media/e5221e0a765c722864880f4b5d541297.png" alt="After School Program logo" style="width:63px;height:60px">
+</div>
+
+<div class="frame"></div><div class="frame2"></div>
+<p class="credit">“Pitch Deck” · A Respective Collective Production</p>
+
+</section>
+
+</div></div>
+<div class="hint" id="hint">← → TO NAVIGATE</div>
+<div class="nav"><button id="prev" aria-label="Previous slide">‹</button><span id="count"></span><button id="next" aria-label="Next slide">›</button></div>
+<script>
+const deck=document.getElementById('deck'),S=[...deck.children];let i=0;
+function fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);deck.style.transform='scale('+s+')'}
+function go(n){i=Math.max(0,Math.min(S.length-1,n));S.forEach((s,k)=>{s.classList.toggle('on',k===i);s.querySelectorAll('video').forEach(v=>{if(k===i){v.currentTime=0;v.play().catch(()=>{})}else v.pause()})});
+document.getElementById('count').textContent=(i+1)+' / '+S.length;history.replaceState(null,'','#'+(i+1))}
+addEventListener('resize',fit);fit();
+addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(i+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(i-1)}if(e.key==='Home')go(0);if(e.key==='End')go(S.length-1);if(e.key==='f')document.documentElement.requestFullscreen?.()});
+document.getElementById('next').onclick=()=>go(i+1);document.getElementById('prev').onclick=()=>go(i-1);
+document.getElementById('stage').addEventListener('click',e=>{go(e.clientX>innerWidth/3?i+1:i-1)});
+let tx=null;addEventListener('touchstart',e=>tx=e.touches[0].clientX);addEventListener('touchend',e=>{if(tx==null)return;const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>40)go(d<0?i+1:i-1);tx=null});
+setTimeout(()=>document.getElementById('hint').style.opacity=0,5000);
+go((parseInt(location.hash.slice(1))||1)-1);
+</script></body></html>
