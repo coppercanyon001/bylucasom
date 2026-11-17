@@ -332,6 +332,10 @@ section{font-family:'Oswald',Arial,sans-serif}
 .hw-bub{position:absolute;margin:0;display:flex;align-items:center;justify-content:center;text-align:center;font-family:'Oswald',Arial,sans-serif;font-weight:700;text-transform:uppercase;color:#1E2A3A;line-height:1.05}
 .tex{opacity:.28}
 .frame,.frame2{display:none!important}
+/* phones: collapse the multi-layer drop-shadows (invisible at phone scale, costly to paint) */
+@media(max-width:700px){
+.vtitle,.card-title,.card-h,.ot-t,.pl-big,.pl-title,.plq-t,.cb1,.cb2,.cb3,.in,.cardsub,.flat-title,.bm-title,.ob-t,.cr,.cr-sm{text-shadow:0 2px 6px rgba(0,0,0,.6)!important}
+}
 
 /* scroll mode: entrance animations hold at their start until the section scrolls into view */
 #deck .title,#deck h2,#deck .statement,#deck .lede,#deck .body,#deck .cards,#deck .split,#deck .pills,#deck .tbl,#deck .tv,#deck .polaroid,#deck .mock,#deck .sticky,#deck .pres{animation-play-state:paused}
@@ -551,12 +555,14 @@ if(innerWidth<700){document.querySelectorAll('video').forEach(v=>{v.src=v.getAtt
 // text animations fire as sections enter the viewport
 const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')})},{threshold:0.35});
 S.forEach(sec=>io.observe(sec));
-// only the section nearest the viewport center plays its videos — phones can't decode 4+ at once
-let active=-1;
-function syncVideos(){const a=idx();if(a===active)return;active=a;
+// only the section nearest the viewport center plays its videos — phones can't decode 4+ at once.
+// debounced so mid-scroll the decoder isn't churned start/stop on every frame.
+let active=-1,syncT=null;
+function playVid(v){v.play().catch(()=>{setTimeout(()=>v.play().catch(()=>{}),250)})}
+function applyVideos(){const a=idx();if(a===active)return;active=a;
 slots.forEach((sl,k)=>{sl.querySelectorAll('video').forEach(v=>{
-if(k===a){if(v.readyState>0){try{v.currentTime=0}catch(_){}}v.play().catch(()=>{})}
-else v.pause()})})}
+if(k===a)playVid(v);else v.pause()})})}
+function syncVideos(){clearTimeout(syncT);syncT=setTimeout(applyVideos,140)}
 // arrow keys / buttons jump between sections (handy when presenting)
 function idx(){const y=scrollY+innerHeight/2;const k=slots.findIndex(sl=>sl.offsetTop+sl.offsetHeight>y);return k<0?slots.length-1:k}
 function go(n){slots[Math.max(0,Math.min(slots.length-1,n))].scrollIntoView({behavior:'smooth'})}
