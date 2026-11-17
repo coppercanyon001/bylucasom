@@ -8,7 +8,7 @@
 <style>
 html,body{margin:0;background:#0b0806}
 #deck{position:relative;width:100%}
-#deck .slot{position:relative;width:100%;overflow:hidden}
+#deck .slot{position:relative;width:100%;overflow:hidden;content-visibility:auto}
 #deck section{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:hidden;transform-origin:0 0}
 x-shape{display:block;border-radius:50%}
 video::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none}
@@ -339,7 +339,7 @@ section{font-family:'Oswald',Arial,sans-serif}
 </style></head><body>
 <div id="stage"><div id="deck">
 <section id="cover" class="curtain" data-transition="fade">
-<img class="bgimg" src="media/56d14b775468b2914d95b645037461b0.jpg" alt="Red velvet theater curtains">
+<img loading="lazy" decoding="async" class="bgimg" src="media/56d14b775468b2914d95b645037461b0.jpg" alt="Red velvet theater curtains">
 <div class="cshade"></div>
 <div class="rec" style="position:absolute;left:96px;top:72px;margin:0;display:flex"><x-shape kind="ellipse" class="dot"></x-shape><p class="tc">REC · 00:00:00:00 · TAKE 1</p></div>
 <h1 class="vtitle" style="left:0;top:150px;width:1920px;text-align:center;transform:rotate(-5deg)">Pitch</h1>
@@ -386,7 +386,7 @@ section{font-family:'Oswald',Arial,sans-serif}
 </section>
 
 <section id="characters" class="scene">
-<img class="bgimg" src="media/33c0df26a00c1300734f4ad426c2e925.jpg" alt="A cork bulletin board with a pinned memo and Polaroids of Ryan (CEO), Farza (Creative Director) and Zoe (Social Media Manager)">
+<img loading="lazy" decoding="async" class="bgimg" src="media/33c0df26a00c1300734f4ad426c2e925.jpg" alt="A cork bulletin board with a pinned memo and Polaroids of Ryan (CEO), Farza (Creative Director) and Zoe (Social Media Manager)">
 <div class="memo" style="left:560px;top:66px;width:800px;height:300px">
 <div class="rec rec-c" style="margin:0 0 8px 0"><x-shape kind="ellipse" class="dot"></x-shape><p class="tc" style="color:#8E2A22">REC · 00:01:54:04 · TAKE 5</p></div>
 <h2 class="flat-title" style="text-align:center;white-space:nowrap">The Agency</h2>
@@ -402,7 +402,7 @@ section{font-family:'Oswald',Arial,sans-serif}
 </section>
 
 <section id="6c364726" class="scene vt pilot2">
-<img class="bgimg" src="media/e31c5b25887c2e3f54ab0bcd356ec3d4.jpg" alt="Retro poster-style film camera on a dolly with a dashed arrow looping around it, labeled one take and no cuts">
+<img loading="lazy" decoding="async" class="bgimg" src="media/e31c5b25887c2e3f54ab0bcd356ec3d4.jpg" alt="Retro poster-style film camera on a dolly with a dashed arrow looping around it, labeled one take and no cuts">
 <svg aria-hidden="true" viewBox="0 0 1920 1080" width="1920" height="1080" style="position:absolute;left:0;top:0;width:1920px;height:1080px"><path d="M1010 222 Q1060 228 1092 262" fill="none" stroke="#1C1410" stroke-width="4" stroke-linecap="round"/><path d="M1086 241 L1092 262 L1072 254" fill="none" stroke="#1C1410" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M965 880 Q1000 850 1012 818" fill="none" stroke="#1C1410" stroke-width="4" stroke-linecap="round"/><path d="M997 832 L1012 818 L1018 838" fill="none" stroke="#1C1410" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
 <p class="pl-lab" style="left:850px;top:180px;width:200px;font-size:36px">One take</p>
 <p class="pl-lab" style="left:845px;top:880px;width:180px;font-size:36px">No cuts</p>
@@ -423,7 +423,7 @@ section{font-family:'Oswald',Arial,sans-serif}
 </section>
 
 <section id="look" class="scene">
-<img class="bgimg" src="media/f5470f517929d60317818cf084d1a763.jpg" alt="Three stacked vintage TVs in an empty room">
+<img loading="lazy" decoding="async" class="bgimg" src="media/f5470f517929d60317818cf084d1a763.jpg" alt="Three stacked vintage TVs in an empty room">
 <div class="lscrim" style="width:1150px;background:linear-gradient(90deg,rgba(18,10,6,.7) 0%,rgba(18,10,6,.45) 45%,rgba(18,10,6,0) 100%)"></div>
 <video class="tvclip" style="left:956px;top:136px;width:388px;height:308px;border-radius:40px" src="media/d4f5f427add9c4113e56ddc94deb6c4f.mp4" poster="media/5c9df0109618f7449945ea920618a810.webp" muted loop playsinline preload="metadata" aria-label="Clip from Birdman on the top TV"></video>
 <video class="tvclip" style="left:628px;top:592px;width:396px;height:320px;border-radius:40px" src="media/31b528e12e982b4f27d3c5c7dc4d769d.mp4" poster="media/0b3eadafd24c33ad9c8fa9a67a973df6.webp" muted loop playsinline preload="metadata" aria-label="Clip from The Studio on the bottom-left TV"></video>
@@ -441,7 +441,7 @@ section{font-family:'Oswald',Arial,sans-serif}
 </section>
 
 <section id="triangle" class="scene vt pilot2">
-<img class="bgimg" src="media/7b0ed1cbf08bdb0c3e838740ce86b20f.jpg" alt="Retro poster-style loop: a TV, a megaphone with coins, and a studio microphone connected by dashed arrows">
+<img loading="lazy" decoding="async" class="bgimg" src="media/7b0ed1cbf08bdb0c3e838740ce86b20f.jpg" alt="Retro poster-style loop: a TV, a megaphone with coins, and a studio microphone connected by dashed arrows">
 <p class="pl-lab" style="left:830px;top:225px;width:240px;font-size:36px">The Show</p>
 <p class="pl-lab" style="left:150px;top:895px;width:300px;font-size:36px">Brands</p>
 <p class="pl-lab" style="left:960px;top:690px;width:150px;font-size:36px">Talent</p>
@@ -461,7 +461,7 @@ section{font-family:'Oswald',Arial,sans-serif}
 </section>
 
 <section id="audience" class="photo-bleed">
-<img class="bgimg" src="media/1ee9a67e467e97861b9a888c73286435.jpg" alt="A packed vintage theater audience in 3D glasses, with seven people near the center circled in red and labeled: agency teams, influencers, photographers, videographers, social media strategists, freelancers, marketing directors">
+<img loading="lazy" decoding="async" class="bgimg" src="media/1ee9a67e467e97861b9a888c73286435.jpg" alt="A packed vintage theater audience in 3D glasses, with seven people near the center circled in red and labeled: agency teams, influencers, photographers, videographers, social media strategists, freelancers, marketing directors">
 <div class="topfade" style="height:240px"></div>
 <div class="ctitle" style="top:60px"><h2 class="card-h" style="margin:0;white-space:nowrap">Who’s the Audience</h2></div>
 <svg aria-hidden="true" viewBox="0 0 1920 1080" width="1920" height="1080" style="position:absolute;left:0;top:0;width:1920px;height:1080px"><ellipse cx="630" cy="650" rx="36" ry="46" fill="none" stroke="#D0281F" stroke-width="4"/><path d="M312 612 Q446 661 588 644" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round"/><path d="M570 637 L588 644 L572 655" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="730" cy="728" rx="38" ry="48" fill="none" stroke="#D0281F" stroke-width="4"/><path d="M433 895 Q579 856 692 754" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round"/><path d="M672 759 L692 754 L685 773" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="893" cy="729" rx="38" ry="48" fill="none" stroke="#D0281F" stroke-width="4"/><path d="M899 925 Q914 853 894 783" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round"/><path d="M890 802 L894 783 L908 798" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="790" cy="587" rx="32" ry="40" fill="none" stroke="#D0281F" stroke-width="4"/><path d="M545 290 Q624 447 766 552" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round"/><path d="M757 534 L766 552 L746 549" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="1033" cy="648" rx="36" ry="46" fill="none" stroke="#D0281F" stroke-width="4"/><path d="M1074 308 Q1021 448 1038 596" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round"/><path d="M1045 578 L1038 596 L1027 580" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="1155" cy="655" rx="36" ry="46" fill="none" stroke="#D0281F" stroke-width="4"/><path d="M1381 300 Q1242 431 1178 611" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round"/><path d="M1192 598 L1178 611 L1175 591" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="1393" cy="582" rx="34" ry="44" fill="none" stroke="#D0281F" stroke-width="4"/><path d="M1628 532 Q1525 528 1432 572" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round"/><path d="M1452 573 L1432 572 L1444 556" fill="none" stroke="#D0281F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -479,7 +479,7 @@ section{font-family:'Oswald',Arial,sans-serif}
 </section>
 
 <section id="brands" class="scene">
-<img class="bgimg" src="media/7581352fa452dfa7bb56bd6c80f68388.jpg" alt="Young agency creatives around a wooden meeting table, all looking up at a wall screen that reads Built for Brands">
+<img loading="lazy" decoding="async" class="bgimg" src="media/7581352fa452dfa7bb56bd6c80f68388.jpg" alt="Young agency creatives around a wooden meeting table, all looking up at a wall screen that reads Built for Brands">
 <div class="scr scr3" style="left:491px;top:41px;width:939px;height:546px;padding:34px 52px;justify-content:flex-start">
 <p class="peb" style="margin:0 0 4px 0;font-size:26px">PARTNERSHIP OPPORTUNITY</p>
 <h3 class="flat-title" style="font-size:76px;margin:0 0 10px 0">Built for Brands</h3>
@@ -495,7 +495,7 @@ section{font-family:'Oswald',Arial,sans-serif}
 </section>
 
 <section id="season" class="scene vt pilot2">
-<img class="bgimg" src="media/5ef30222b6e822eb015e7deb7b8fa551.jpg" alt="Retro poster-style story web: a film reel on a starburst connected to six episodes: a flip chart, a DSLR camera, a cracked phone, swapping speech bubbles, a laptop with an edit timeline, and a question mark">
+<img loading="lazy" decoding="async" class="bgimg" src="media/5ef30222b6e822eb015e7deb7b8fa551.jpg" alt="Retro poster-style story web: a film reel on a starburst connected to six episodes: a flip chart, a DSLR camera, a cracked phone, swapping speech bubbles, a laptop with an edit timeline, and a question mark">
 <h2 class="flat-title" style="position:absolute;left:360px;top:139px;width:1200px;text-align:center;white-space:nowrap;font-size:84px">Season One</h2>
 <div class="sweb" style="left:20px;top:271px;width:460px;align-items:flex-end;text-align:right"><p class="sw-n">Ep 1 · The Pitch</p><p class="sw-d">Pitch Big X the Plug on BetterHelp. One take.</p></div>
 <div class="sweb" style="left:1462px;top:271px;width:420px"><p class="sw-n">Ep 2 · The Brand Shoot</p><p class="sw-d">The campaign goes into production.</p></div>
@@ -509,7 +509,7 @@ section{font-family:'Oswald',Arial,sans-serif}
 </section>
 
 <section id="room" class="scene vt pilot2">
-<img class="bgimg" src="media/9d2ad2ae0f8499a44bf32ba0b064d572.jpg" alt="Retro poster-style process: the team brainstorming around a table, then a cork board of index cards with the season’s episode ideas, then a laptop with script pages and a phone showing a social video feed">
+<img loading="lazy" decoding="async" class="bgimg" src="media/9d2ad2ae0f8499a44bf32ba0b064d572.jpg" alt="Retro poster-style process: the team brainstorming around a table, then a cork board of index cards with the season’s episode ideas, then a laptop with script pages and a phone showing a social video feed">
 <h2 class="flat-title" style="position:absolute;left:260px;top:50px;width:1400px;text-align:center;white-space:nowrap;font-size:84px">How We Write It</h2>
 <p class="pl-pair" style="position:absolute;left:360px;top:148px;width:1200px;text-align:center;font-size:38px;margin:0">We start from experience, then heighten it.</p>
 <div class="hw-board" style="left:852px;top:380px;width:330px;height:252px"><div class="hw-card" style="transform:rotate(-2deg)"><span class="hw-pin"></span><p class="hw-t">The Pitch</p><p class="hw-b">• Big X × BetterHelp</p><p class="hw-b">• One take</p></div><div class="hw-card" style="transform:rotate(1.5deg)"><span class="hw-pin"></span><p class="hw-t">Brand Shoot</p><p class="hw-b">• On set with the talent</p></div><div class="hw-card" style="transform:rotate(-1deg)"><span class="hw-pin"></span><p class="hw-t">Canceled</p><p class="hw-b">• Talent canceled at launch</p><p class="hw-b">• Pivot</p></div><div class="hw-card" style="transform:rotate(2deg)"><span class="hw-pin"></span><p class="hw-t">Reverse Pitch</p><p class="hw-b">• Sell the brand on the talent</p></div><div class="hw-card" style="transform:rotate(-1.5deg)"><span class="hw-pin"></span><p class="hw-t">The Edit</p><p class="hw-b">• Indecisive client</p></div><div class="hw-card" style="transform:rotate(1deg)"><span class="hw-pin"></span><p class="hw-t">Ep 6+</p><p class="hw-b">• Ideas from the room</p></div></div>
@@ -522,7 +522,7 @@ section{font-family:'Oswald',Arial,sans-serif}
 </section>
 
 <section id="fin" class="curtain" data-transition="fade">
-<img class="bgimg" src="media/56d14b775468b2914d95b645037461b0.jpg" alt="Red velvet theater curtains">
+<img loading="lazy" decoding="async" class="bgimg" src="media/56d14b775468b2914d95b645037461b0.jpg" alt="Red velvet theater curtains">
 <div class="cshade"></div>
 <h1 class="vtitle" style="left:0;top:330px;width:1920px;text-align:center;transform:rotate(-5deg)">Fin</h1>
 <div style="position:absolute;left:0;top:850px;width:1920px;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:30px">
