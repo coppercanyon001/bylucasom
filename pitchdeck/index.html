@@ -546,19 +546,24 @@ S.forEach(sec=>{const w=document.createElement('div');w.className='slot';deck.in
 const slots=[...deck.children];
 function fit(){const s=innerWidth/1920;slots.forEach(sl=>{sl.style.height=(1080*s)+'px';sl.firstElementChild.style.transform='scale('+s+')'})}
 addEventListener('resize',fit);fit();
-// play animations + videos as sections enter the viewport
-const io=new IntersectionObserver(es=>{es.forEach(e=>{const sec=e.target;
-if(e.isIntersecting){if(!sec.classList.contains('on')){sec.classList.add('on');sec.querySelectorAll('video').forEach(v=>{v.currentTime=0})}
-sec.querySelectorAll('video').forEach(v=>v.play().catch(()=>{}))}
-else{sec.querySelectorAll('video').forEach(v=>v.pause())}})},{threshold:0.35});
+// phones get lighter 640px encodes (several sections share the screen on tall viewports)
+if(innerWidth<700){document.querySelectorAll('video').forEach(v=>{v.src=v.getAttribute('src').replace(/\.mp4$/,'-sm.mp4')})}
+// text animations fire as sections enter the viewport
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')})},{threshold:0.35});
 S.forEach(sec=>io.observe(sec));
+// only the section nearest the viewport center plays its videos — phones can't decode 4+ at once
+let active=-1;
+function syncVideos(){const a=idx();if(a===active)return;active=a;
+slots.forEach((sl,k)=>{sl.querySelectorAll('video').forEach(v=>{
+if(k===a){if(v.readyState>0){try{v.currentTime=0}catch(_){}}v.play().catch(()=>{})}
+else v.pause()})})}
 // arrow keys / buttons jump between sections (handy when presenting)
 function idx(){const y=scrollY+innerHeight/2;const k=slots.findIndex(sl=>sl.offsetTop+sl.offsetHeight>y);return k<0?slots.length-1:k}
 function go(n){slots[Math.max(0,Math.min(slots.length-1,n))].scrollIntoView({behavior:'smooth'})}
 addEventListener('keydown',e=>{if(['ArrowRight','PageDown'].includes(e.key)){e.preventDefault();go(idx()+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(idx()-1)}if(e.key==='Home')go(0);if(e.key==='End')go(slots.length-1);if(e.key==='f')document.documentElement.requestFullscreen?.()});
 document.getElementById('next').onclick=()=>go(idx()+1);document.getElementById('prev').onclick=()=>go(idx()-1);
 const count=document.getElementById('count');
-function tick(){count.textContent=(idx()+1)+' / '+slots.length}
+function tick(){count.textContent=(idx()+1)+' / '+slots.length;syncVideos()}
 addEventListener('scroll',tick,{passive:true});tick();
 setTimeout(()=>document.getElementById('hint').style.opacity=0,5000);
 const h=parseInt(location.hash.slice(1));if(h)go(h-1);
