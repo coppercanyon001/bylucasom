@@ -572,5 +572,13 @@ const count=document.getElementById('count');
 function tick(){count.textContent=(idx()+1)+' / '+slots.length;syncVideos()}
 addEventListener('scroll',tick,{passive:true});tick();
 setTimeout(()=>document.getElementById('hint').style.opacity=0,5000);
+// iOS blocks muted autoplay in Low Power Mode / under power pressure — a tap counts as a
+// user gesture and reliably starts playback. A tap (not a scroll) plays the centered slide's videos.
+if('ontouchstart' in window){document.getElementById('hint').textContent='TAP TO PLAY · SCROLL ↓';}
+let tStart=null;
+addEventListener('touchstart',e=>{tStart={x:e.touches[0].clientX,y:e.touches[0].clientY,t:Date.now()}},{passive:true});
+addEventListener('touchend',e=>{if(!tStart)return;const c=e.changedTouches[0];
+if(Math.abs(c.clientX-tStart.x)<12&&Math.abs(c.clientY-tStart.y)<12&&Date.now()-tStart.t<450){
+active=-1;applyVideos();}tStart=null},{passive:true});
 const h=parseInt(location.hash.slice(1));if(h)go(h-1);
 </script></body></html>
