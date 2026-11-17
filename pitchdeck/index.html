@@ -11,6 +11,8 @@ html,body{margin:0;background:#0b0806}
 #deck .slot{position:relative;width:100%;overflow:hidden}
 #deck section{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:hidden;transform-origin:0 0}
 x-shape{display:block;border-radius:50%}
+video::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none}
+video::-webkit-media-controls{display:none!important}
 section p,section h1,section h2,section h3{margin-top:0}
 video{display:block}
 .nav{position:fixed;bottom:18px;right:22px;display:flex;gap:10px;align-items:center;font:500 14px 'Oswald',Arial,sans-serif;letter-spacing:2px;color:rgba(242,230,208,.75);z-index:10;user-select:none}
@@ -354,7 +356,7 @@ section{font-family:'Oswald',Arial,sans-serif}
 </section>
 
 <section id="show" class="scene">
-<video class="bgimg"  src="media/f5eb97ede4572cf652c94e422f8488db.mp4" poster="media/9bc73236d983b113c0c9d77fca9a8b84.webp" autoplay muted loop playsinline preload="auto" aria-label="Clip from The Studio, season 1 episode 1: an agency exec in oversized glasses mid-pitch"></video>
+<video class="bgimg"  src="media/f5eb97ede4572cf652c94e422f8488db.mp4" poster="media/9bc73236d983b113c0c9d77fca9a8b84.webp" muted loop playsinline preload="metadata" aria-label="Clip from The Studio, season 1 episode 1: an agency exec in oversized glasses mid-pitch"></video>
 <div class="lscrim" style="width:900px"></div>
 <div class="showtl">
 <div class="rec"><x-shape kind="ellipse" class="dot"></x-shape><p class="tc">REC · 00:00:33:07 · TAKE 2</p></div>
@@ -369,7 +371,7 @@ section{font-family:'Oswald',Arial,sans-serif}
 </section>
 
 <section id="98b63d41" class="scene">
-<video class="bgimg"  src="media/626890d26bf296a61b4cc733195ed8ca.mp4" poster="media/7a88b2ab6cfb8fcab0871233453f02d4.webp" autoplay muted loop playsinline preload="auto" aria-label="Man-on-the-street clip: a young man in a shearling coat walking down a busy city sidewalk"></video>
+<video class="bgimg"  src="media/626890d26bf296a61b4cc733195ed8ca.mp4" poster="media/7a88b2ab6cfb8fcab0871233453f02d4.webp" muted loop playsinline preload="metadata" aria-label="Man-on-the-street clip: a young man in a shearling coat walking down a busy city sidewalk"></video>
 <div class="rscrim"></div>
 <div class="showtl" style="width:860px;left:980px;top:auto;bottom:96px;align-items:flex-end;text-align:right">
 <div class="rec" style="justify-content:flex-end"><x-shape kind="ellipse" class="dot"></x-shape><p class="tc">REC · 00:01:00:14 · TAKE 3</p></div>
@@ -423,9 +425,9 @@ section{font-family:'Oswald',Arial,sans-serif}
 <section id="look" class="scene">
 <img class="bgimg" src="media/f5470f517929d60317818cf084d1a763.jpg" alt="Three stacked vintage TVs in an empty room">
 <div class="lscrim" style="width:1150px;background:linear-gradient(90deg,rgba(18,10,6,.7) 0%,rgba(18,10,6,.45) 45%,rgba(18,10,6,0) 100%)"></div>
-<video class="tvclip" style="left:956px;top:136px;width:388px;height:308px;border-radius:40px" src="media/d4f5f427add9c4113e56ddc94deb6c4f.mp4" poster="media/5c9df0109618f7449945ea920618a810.webp" autoplay muted loop playsinline preload="auto" aria-label="Clip from Birdman on the top TV"></video>
-<video class="tvclip" style="left:628px;top:592px;width:396px;height:320px;border-radius:40px" src="media/31b528e12e982b4f27d3c5c7dc4d769d.mp4" poster="media/0b3eadafd24c33ad9c8fa9a67a973df6.webp" autoplay muted loop playsinline preload="auto" aria-label="Clip from The Studio on the bottom-left TV"></video>
-<video class="tvclip" style="left:1256px;top:592px;width:396px;height:312px;border-radius:40px" src="media/4e5ceea22a82c9d3123af4e59343bdfd.mp4" poster="media/a27837c73b3956d83cc1c9a71fcd1452.webp" autoplay muted loop playsinline preload="auto" aria-label="Clip from Babylon on the bottom-right TV"></video>
+<video class="tvclip" style="left:956px;top:136px;width:388px;height:308px;border-radius:40px" src="media/d4f5f427add9c4113e56ddc94deb6c4f.mp4" poster="media/5c9df0109618f7449945ea920618a810.webp" muted loop playsinline preload="metadata" aria-label="Clip from Birdman on the top TV"></video>
+<video class="tvclip" style="left:628px;top:592px;width:396px;height:320px;border-radius:40px" src="media/31b528e12e982b4f27d3c5c7dc4d769d.mp4" poster="media/0b3eadafd24c33ad9c8fa9a67a973df6.webp" muted loop playsinline preload="metadata" aria-label="Clip from The Studio on the bottom-left TV"></video>
+<video class="tvclip" style="left:1256px;top:592px;width:396px;height:312px;border-radius:40px" src="media/4e5ceea22a82c9d3123af4e59343bdfd.mp4" poster="media/a27837c73b3956d83cc1c9a71fcd1452.webp" muted loop playsinline preload="metadata" aria-label="Clip from Babylon on the bottom-right TV"></video>
 <div class="lookleft" style="left:80px;top:64px;width:820px">
 <div class="rec"><x-shape kind="ellipse" class="dot"></x-shape><p class="tc">REC · 00:02:48:18 · TAKE 7</p></div>
 <h2 class="card-h" style="white-space:nowrap;margin:0 0 22px 0">The Look</h2>
